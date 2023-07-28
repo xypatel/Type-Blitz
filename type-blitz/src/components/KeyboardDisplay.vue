@@ -40,7 +40,6 @@ export default {
         keyElement.classList.remove("hit")
       })
 
-
     }
   },
   mounted() {
@@ -195,43 +194,49 @@ li {
 }
 
 .pinky {
-  background-color: crimson;
-  border: 2px solid crimson;
+  background-color: hsl(211, 100%, 50%);
+  border-style: groove;
+  border-color: hsl(211, 100%, 50%);
 }
+
 .pinky.selected {
-  color: crimson;
+  color: hsl(211, 100%, 50%);
 }
 
 .ring {
-  background-color: coral;
-  border: 2px solid coral;
+  background-color: hsl(190, 100%, 50%);
+  border-style: groove;
+  border-color: hsl(190, 100%, 50%);
 }
 .ring.selected {
-  color: coral;
+  color: hsl(190, 100%, 50%);
 }
 
 .middle {
-  background-color: darkorange;
-  border: 2px solid darkorange;
+  background-color: hsl(171, 100%, 50%);
+  border-style: groove;
+  border-color: hsl(171, 100%, 50%);
 }
 .middle.selected {
-  color: darkorange;
+  color: hsl(171, 100%, 50%);
 }
 
 .pointer1st {
-  background-color: gold;
-  border: 2px solid gold;
+  background-color: hsl(145, 100%, 50%);
+  border-style: groove;
+  border-color: hsl(145, 100%, 50%);
 }
 .pointer1st.selected {
-  color: gold;
+  color: hsl(145, 100%, 50%);
 }
 
 .pointer2nd {
-  background-color: khaki;
-  border: 2px solid khaki;
+  background-color: hsl(100, 100%, 70%);
+  border-style: groove;
+  border-color: hsl(100, 100%, 70%);
 }
 .pointer2nd.selected {
-  color: khaki;
+  color: hsl(100, 100%, 70%);
 }
 
 .fill-out-key {
