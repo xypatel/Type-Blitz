@@ -124,6 +124,7 @@ export default {
 </template>
 
 <style scoped>
+
 body {
   background-color: black;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -161,16 +162,27 @@ li {
 }
 
 #inputDisplay{
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 50%;
-  height: 2em;
-  width: 3em;
-  border-radius: 0.5em;
-  font-size: 5em;
-  border-style: solid;
+  padding-left: 1%;
+  padding-right: 1%;
+  width: fit-content;
+
+  border-style: ridge;
+  border-width: thick;
+  border-radius: .20em;
+  border-color: #222222;
+
+  font-size: 3em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: white;
+
+
+  background-color: rgba(0,0,0,0.3);
+  margin-left: 11em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+
 }
 
 #Tab {
@@ -260,7 +272,7 @@ li {
 .hit {
   -webkit-animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
   animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-  background-color: magenta;
+  background-color: rgb(255, 0, 255, 100%);
 }
 
 @-webkit-keyframes hit {
