@@ -1,26 +1,35 @@
 <script>
-import { ref } from 'vue'
-
 export default {
-  setup() {
-    const input = ref('')
-    const items = ref([])
-    const add = () => {
-      items.value.push(input.value)
-      input.value = ''
-    }
-
-    return { input, items, add }
+  data() {
+    return {
+      items: "",
+      input: "",
+    };
   },
-}
+  methods: {
+    onKeyup(event) {
+      if (event.key === "Enter") {
+        this.items = this.input + "";
+        this.input = "";
+      } else {
+        this.input += event.key;
+      }
+    },
+  },
+  mounted() {
+    document.addEventListener("keyup", this.onKeyup);
+  },
+  beforeDestroy() {
+    document.removeEventListener("keyup", this.onKeyup);
+  },
+};
 </script>
 
 <template>
   <div>
-<!--    <p>{{ items }}</p>-->
+    <p>{{ items }}</p>
     <h3>Keyboard Input</h3>
     <p>{{ input }}</p>
-    <input type="text" v-model="input" @keyup="add">
   </div>
 </template>
 
