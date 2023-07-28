@@ -151,7 +151,7 @@ body {
 li {
   height: 3em;
   width: 3em;
-  color: rgba(0,0,0,0.7);
+  color: rgba(0,0,0,1);
   border-radius: 0.4em;
   line-height: 3em;
   letter-spacing: 1px;
@@ -166,19 +166,16 @@ li {
   padding-right: 1%;
   width: fit-content;
 
-  border-style: ridge;
-  border-width: thick;
-  border-radius: .20em;
-  border-color: #222222;
 
-  font-size: 3em;
+
+  font-size: 2em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 500;
+
   color: white;
 
 
-  background-color: rgba(0,0,0,0.3);
-  margin-left: 11em;
+
+  margin-left: 53%;
   margin-top: 1em;
   margin-bottom: 1em;
 
