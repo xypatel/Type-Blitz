@@ -5,6 +5,7 @@ import PositionGame from "@/components/PositionGame.vue";
 
 <template>
   <PositionGame />
+
   <div class="keyboard">
     <KeyboardDisplay />
   </div>
