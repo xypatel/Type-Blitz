@@ -28,11 +28,12 @@ export default {
 
 <style scoped>
 #inputDisplay{
-  padding-left: 1%;
-  padding-right: 1%;
   width: fit-content;
   font-size: 2em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
+  position: absolute;
+  top: 1em;
+  right: 2em;
 }
 </style>
