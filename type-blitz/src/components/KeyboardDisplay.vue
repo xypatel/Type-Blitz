@@ -8,11 +8,29 @@ export default {
   methods: {
     onKeyup(event) {
       this.input = event.key;
-      console.log("Key pressed: " + event.key);
       this.bumpKey(event);
     },
     bumpKey(event) {
-      const keyPressed = String.fromCharCode(event.keyCode);
+      console.log("event.keyCode: " + event.key)
+      let keyPressed = String.fromCharCode(event.keyCode);
+
+      if (event.keyCode >= 48 && event.keyCode <= 90) {
+        console.log("Letter Or Number: " + keyPressed);
+      } else {
+        keyPressed = event.key;
+        console.log("Not a letter or number key: " + keyPressed);
+        switch (keyPressed) {
+          case '\\' : keyPressed = "Backslash"; break;
+          case '\]' : keyPressed = "CloseBracket"; break;
+          case '\[' : keyPressed = "OpenBracket"; break;
+          case '\;' : keyPressed = "SemiColon"; break;
+          case '\'' : keyPressed = "Quote"; break;
+          case '\,' : keyPressed = "Comma"; break;
+          case '\.' : keyPressed = "Period"; break;
+          case '\/' : keyPressed = "Forwardslash"; break;
+        }
+      }
+
       const keyElement = document.getElementById(keyPressed);
 
       keyElement.classList.add("hit")
@@ -37,7 +55,7 @@ export default {
   {{ input }}
   <div class="keyboard">
     <ul class="row row-0">
-      <li class="pinky" id="esc" >ESC</li>
+      <li class="pinky" id="Escape" >ESC</li>
       <li class="pinky" id="1">1</li>
       <li class="ring" id="2">2</li>
       <li class="middle" id="3">3</li>
@@ -50,10 +68,10 @@ export default {
       <li class="pinky" id="10">0</li>
       <li class="pinky" >-</li>
       <li class="pinky" >+</li>
-      <li class="pinky" id="back">BACK</li>
+      <li class="pinky" id="Backspace">BACK</li>
     </ul>
     <ul class="row row-1">
-      <li class="pinky" id="tab">TAB</li>
+      <li class="pinky" id="Tab">TAB</li>
       <li class="pinky" id="Q">Q</li>
       <li class="ring" id="W">W</li>
       <li class="middle" id="E">E</li>
@@ -64,12 +82,12 @@ export default {
       <li class="middle" id="I">I</li>
       <li class="ring" id="O">O</li>
       <li class="pinky" id="P">P</li>
-      <li class="pinky" >[</li>
-      <li class="pinky" >]</li>
-      <li class="pinky" >\</li>
+      <li class="pinky" id="OpenBracket">[</li>
+      <li class="pinky" id="CloseBracket">]</li>
+      <li class="pinky" id="Backslash">\</li>
     </ul>
     <ul class="row row-2">
-      <li class="pinky" id="caps">CAPS</li>
+      <li class="pinky" id="CapsLock">CAPS</li>
       <li class="pinky" id="A">A</li>
       <li class="ring" id="S">S</li>
       <li class="middle" id="D">D</li>
@@ -79,12 +97,12 @@ export default {
       <li class="pointer1st" id="J">J</li>
       <li class="middle" id="K">K</li>
       <li class="ring" id="L">L</li>
-      <li class="pinky" >:</li>
-      <li class="pinky" >''</li>
-      <li class="pinky" id="enter">ENTER</li>
+      <li class="pinky" id="SemiColon">;</li>
+      <li class="pinky" id="Quote">'</li>
+      <li class="pinky" id="Enter">ENTER</li>
     </ul>
     <ul class="row row-3">
-      <li class="pinky" id="left-shift">SHIFT</li>
+      <li class="pinky" id="Shift">SHIFT</li>
       <li class="pinky" id="Z">Z</li>
       <li class="ring" id="X">X</li>
       <li class="middle" id="C">C</li>
@@ -92,10 +110,10 @@ export default {
       <li class="pointer2nd" id="B">B</li>
       <li class="pointer2nd" id="N">N</li>
       <li class="pointer1st" id="M">M</li>
-      <li class="middle" >,</li>
-      <li class="ring" >.</li>
-      <li class="pinky" >;</li>
-      <li class="pinky" id="right-shift">SHIFT</li>
+      <li class="middle" id="Comma">,</li>
+      <li class="ring" id="Period">.</li>
+      <li class="pinky" id="Forwardslash">/</li>
+      <li class="pinky" id="Shift">SHIFT</li>
     </ul>
   </div>
 <!--  <h1 class="title">Hands on the keyboard</h1>-->
@@ -136,27 +154,23 @@ li {
   font-size: 1em;
 }
 
-#tab {
+#Tab {
   width: 5em;
 }
 
-#caps {
+#CapsLock {
   width: 6em;
 }
 
-#left-shift {
+#Shift {
   width: 8em;
 }
 
-#enter {
+#Enter {
   width: 6em;
 }
 
-#right-shift {
-  width: 8em;
-}
-
-#back {
+#Backspace {
   width: 5em;
 }
 
