@@ -37,14 +37,4 @@ import KeyboardDisplay from "@/components/KeyboardDisplay.vue";
   justify-content: center;
 }
 
-.keyboard {
-  position: fixed;
-  bottom: 10em;
-  left: 0;
-  right: 0;
-  margin-bottom: 1em;
-  display: flex;
-  justify-content: center;
-}
-
 </style>

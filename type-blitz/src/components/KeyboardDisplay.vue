@@ -20,6 +20,8 @@ export default {
         keyPressed = event.key;
         console.log("Not a letter or number key: " + keyPressed);
         switch (keyPressed) {
+          case '\-' : keyPressed = "Minus"; break;
+          case '\=' : keyPressed = "Equal"; break;
           case '\\' : keyPressed = "Backslash"; break;
           case '\]' : keyPressed = "CloseBracket"; break;
           case '\[' : keyPressed = "OpenBracket"; break;
@@ -52,7 +54,10 @@ export default {
 
 
 <template>
-  {{ input }}
+  <div id="inputDisplay">
+    <p>{{ input }}</p>
+  </div>
+
   <div class="keyboard">
     <ul class="row row-0">
       <li class="pinky" id="Escape" >ESC</li>
@@ -65,9 +70,9 @@ export default {
       <li class="pointer1st" id="7">7</li>
       <li class="middle" id="8">8</li>
       <li class="ring" id="9">9</li>
-      <li class="pinky" id="10">0</li>
-      <li class="pinky" >-</li>
-      <li class="pinky" >+</li>
+      <li class="pinky" id="0">0</li>
+      <li class="pinky" id="Minus" >-</li>
+      <li class="pinky" id="Equal">=</li>
       <li class="pinky" id="Backspace">BACK</li>
     </ul>
     <ul class="row row-1">
@@ -134,6 +139,8 @@ body {
 .keyboard {
   display: flex;
   flex-direction: column;
+  margin: auto;
+  padding-left: 10em;
 }
 
 .row {
@@ -152,6 +159,19 @@ li {
   transition: 0.3s;
   text-align: center;
   font-size: 1em;
+}
+
+#inputDisplay{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50%;
+  height: 2em;
+  width: 3em;
+  border-radius: 0.5em;
+  font-size: 5em;
+  border-style: solid;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #Tab {
@@ -235,6 +255,7 @@ li {
 .hit {
   -webkit-animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
   animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  background-color: magenta;
 }
 
 @-webkit-keyframes hit {
