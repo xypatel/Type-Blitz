@@ -53,10 +53,6 @@ export default {
 
 
 <template>
-  <div id="inputDisplay">
-    <p>{{ input }}</p>
-  </div>
-
   <div class="keyboard">
     <ul class="row row-0">
       <li class="pinky" id="Escape" >ESC</li>
@@ -159,27 +155,6 @@ li {
   transition: 0.3s;
   text-align: center;
   font-size: 1em;
-}
-
-#inputDisplay{
-  padding-left: 1%;
-  padding-right: 1%;
-  width: fit-content;
-
-
-
-  font-size: 2em;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  color: white;
-
-
-
-  margin-left: 53%;
-  margin-top: 1em;
-  margin-bottom: 1em;
-
-
 }
 
 #Tab {
