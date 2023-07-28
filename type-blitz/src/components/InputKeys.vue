@@ -28,7 +28,7 @@ export default {
 <template>
   <div>
     <p>{{ items }}</p>
-    <h3>Keyboard Input</h3>
+    <h1>Keyboard Input</h1>
     <p>{{ input }}</p>
   </div>
 </template>
@@ -38,5 +38,11 @@ input {
   width: 100%;
   height: 50px;
   font-size: 2rem;
+}
+p {
+  white-space: pre-wrap;
+  inline-size: 15em;
+  overflow-wrap: break-word;
+  font-size: 1em;
 }
 </style>

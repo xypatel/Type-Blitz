@@ -1,12 +1,43 @@
 <script>
+export default {
+  data() {
+    return {
+      input: "",
+    };
+  },
+  methods: {
+    onKeyup(event) {
+      this.input = event.key;
+      console.log("Key pressed: " + event.key);
+      this.bumpKey(event);
+    },
+    bumpKey(event) {
+      const keyPressed = String.fromCharCode(event.keyCode);
+      const keyElement = document.getElementById(keyPressed);
 
+      keyElement.classList.add("hit")
+      keyElement.addEventListener('animationend', () => {
+        keyElement.classList.remove("hit")
+      })
+
+
+    }
+  },
+  mounted() {
+    document.addEventListener("keyup", this.onKeyup);
+  },
+  beforeDestroy() {
+    document.removeEventListener("keyup", this.onKeyup);
+  },
+};
 </script>
 
 
 <template>
+  {{ input }}
   <div class="keyboard">
     <ul class="row row-0">
-      <li class="pinky" id="esc">ESC</li>
+      <li class="pinky" id="esc" >ESC</li>
       <li class="pinky" id="1">1</li>
       <li class="ring" id="2">2</li>
       <li class="middle" id="3">3</li>

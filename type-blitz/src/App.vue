@@ -18,9 +18,9 @@ import KeyboardDisplay from "@/components/KeyboardDisplay.vue";
 <!--  <main>-->
 <!--    <TheWelcome />-->
 <!--  </main>-->
-  <div class="input">
-  <InputKeys />
-  </div>
+<!--  <div class="input">-->
+<!--  <InputKeys />-->
+<!--  </div>-->
 
   <div class="keyboard">
     <KeyboardDisplay />
