@@ -1,27 +1,5 @@
 <script>
-export default {
-  data () {
-    return {
-      input: ''
-    }
-  },
-  mounted () {
-    // Create a listener for the keyup event
-    document.addEventListener('keyup', this.onKeyUp)
-  },
-  methods: {
-    // This function is called every time the user presses a key
-    onKeyUp (event) {
-      // Get the key code of the pressed key
-      const keyCode = event.keyCode
 
-      // If the key code is not 13 (enter), update the input variable
-      if (keyCode !== 13) {
-        this.input += String.fromCharCode(keyCode)
-      }
-    }
-  }
-}
 </script>
 
 

@@ -18,35 +18,33 @@ import KeyboardDisplay from "@/components/KeyboardDisplay.vue";
 <!--  <main>-->
 <!--    <TheWelcome />-->
 <!--  </main>-->
-  <div class="inputKeys">
-    <InputKeys />
+  <div class="input">
+  <InputKeys />
   </div>
 
   <div class="keyboard">
-  <KeyboardDisplay />
+    <KeyboardDisplay />
   </div>
 </template>
 
 <style scoped>
-
-.inputKeys{
+.input {
   position: fixed;
   bottom: 30em;
   left: 0;
   right: 0;
-  margin-top: 1em;
   display: flex;
   justify-content: center;
 }
+
 .keyboard {
   position: fixed;
-  bottom: 5em;
+  bottom: 10em;
   left: 0;
   right: 0;
   margin-bottom: 1em;
   display: flex;
   justify-content: center;
-
 }
 
 </style>
