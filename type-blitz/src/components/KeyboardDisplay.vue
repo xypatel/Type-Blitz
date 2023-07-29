@@ -161,6 +161,7 @@ li {
   transition: 0.3s;
   text-align: center;
   font-size: 1em;
+  text-shadow: 2px 2px 5px goldenrod;
 }
 
 #Tab {
@@ -187,6 +188,7 @@ li {
   background-color: hsl(211, 100%, 50%);
   border-style: groove;
   border-color: hsl(211, 100%, 50%);
+  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
 }
 
 .pinky.selected {
@@ -197,6 +199,7 @@ li {
   background-color: hsl(190, 100%, 50%);
   border-style: groove;
   border-color: hsl(190, 100%, 50%);
+  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
 }
 .ring.selected {
   color: hsl(190, 100%, 50%);
@@ -206,6 +209,7 @@ li {
   background-color: hsl(171, 100%, 50%);
   border-style: groove;
   border-color: hsl(171, 100%, 50%);
+  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
 }
 .middle.selected {
   color: hsl(171, 100%, 50%);
@@ -215,6 +219,7 @@ li {
   background-color: hsl(145, 100%, 50%);
   border-style: groove;
   border-color: hsl(145, 100%, 50%);
+  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
 }
 .pointer1st.selected {
   color: hsl(145, 100%, 50%);
@@ -224,6 +229,7 @@ li {
   background-color: hsl(100, 100%, 70%);
   border-style: groove;
   border-color: hsl(100, 100%, 70%);
+  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
 }
 .pointer2nd.selected {
   color: hsl(100, 100%, 70%);
