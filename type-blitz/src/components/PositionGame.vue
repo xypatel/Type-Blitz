@@ -89,17 +89,22 @@ display: inline-block;
 }
 .toType{
   display: inline-block;
-  width: fit-content;
+  text-align: center;
   font-size: 5em;
   font-family: Lucida Console, Courier, monospace;
+  padding-left: .25em;
   color: deepskyblue;
   position: absolute;
   top: 8em;
   left: 35%;
   inline-size: 6em;
-  height: 5em;
+  height: fit-content;
   overflow: hidden;
   letter-spacing: 1em;
+  border-style: dashed;
+  border-width: 2px;
+  border-radius: .5em;
+  border-color: limegreen;
 }
 
 .result{
@@ -110,9 +115,9 @@ display: inline-block;
   color: white;
   position: absolute;
   top: 5em;
-  left: 45%;
+  left: 47%;
   inline-size: 6em;
-  height: 5em;
+  height: fit-content;
   overflow: hidden;
   letter-spacing: .5em;
 }
