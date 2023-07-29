@@ -6,6 +6,7 @@ export default {
       inputString:"",
       keysToType:"jkl;",
       resultMatched: false,
+      keysEntered: "",
     };
   },
   methods: {
@@ -19,6 +20,7 @@ export default {
       if(event.key == "Backspace"){
         this.inputString = this.inputString.slice(0, -1);
       } else if(event.key == "Enter"){
+        this.keysEntered = this.inputString;
         this.checkInput();
         this.inputString = "";
       } else if(event.key != "Shift" && event.key != "Tab"){
@@ -28,14 +30,14 @@ export default {
       console.log("PositionGame : " + event.key)
     },
     async checkInput(){
-      if(this.inputString === this.keysToType){
+      if(this.keysEntered === this.keysToType){
         this.resultMatched = true;
         console.log("Correct!");
       } else {
         this.resultMatched = false;
         console.log("Incorrect!");
       }
-      setTimeout(() => this.resultMatched = false, 1000);
+      setTimeout(() => this.keysToType = "uiop", 1000);
     }
   },
   mounted() {
@@ -52,6 +54,7 @@ export default {
     <p>{{ keysToType }}</p>
   </div>
   <div class="result">
+    <p>{{keysEntered}}</p>
     <h1 v-if="resultMatched">&#9989</h1>
     <h1 v-else-if="!resultMatched">&#10060</h1>
   </div>
@@ -108,17 +111,20 @@ display: inline-block;
 }
 
 .result{
-  display: inline-block;
+  display: flex;
   width: fit-content;
   font-size: 5em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
   position: absolute;
   top: 5em;
-  left: 47%;
+  left: 33%;
   inline-size: 6em;
   height: fit-content;
-  overflow: hidden;
-  letter-spacing: .5em;
+}
+
+.result p{
+  padding-top: 1em;
+  letter-spacing: 1em;
 }
 </style>
