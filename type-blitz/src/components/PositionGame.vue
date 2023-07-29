@@ -10,6 +10,10 @@ export default {
     onKeyup(event) {
       this.inputKey = event.key;
 
+      if(this.inputString.length > 5){
+        this.inputString = "";
+      }
+
       if(event.key == "Backspace"){
         this.inputString = this.inputString.slice(0, -1);
       } else if(event.key == "Enter"){
@@ -18,9 +22,7 @@ export default {
         this.inputString += event.key;
       }
 
-      if(this.inputString.length > 5){
-        this.inputString = this.inputString.slice(1);
-      }
+
       console.log("game : " + event.key)
     },
   },
