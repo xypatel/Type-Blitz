@@ -4,9 +4,10 @@ export default {
     return {
       inputKey: "",
       inputString:"",
-      keysToType:"jkl;",
+      keysToType:"fj",
       resultMatched: false,
       keysEntered: "",
+      level: -1,
     };
   },
   methods: {
@@ -33,7 +34,8 @@ export default {
       if(this.keysEntered === this.keysToType){
         this.resultMatched = true;
         console.log("Correct!");
-        this.changeKeysToTypeRandomly()
+        this.level++;
+        this.changeKeysToTypeByLevel();
       } else {
         this.resultMatched = false;
         console.log("Incorrect!");
@@ -43,6 +45,20 @@ export default {
       const combos = ["asdf", "qwer", "zxcv", "jkl;", "uiop", "nm,.", "1234", "5678", "90", "-=", "[]\\"];
       const randomIndex = Math.floor(Math.random() * combos.length);
       this.keysToType = combos[randomIndex];
+    },
+    changeKeysToTypeByLevel(){
+      const doublesHome = ["ff", "jj", "dd", "kk", "ss", "ll", "aa", ";;"];
+      const foursHome = ["asdf", "jkl;", "fdsa", ";lkj"];
+      const doublesTop = ["uu", "rr", "ii", "ee", "oo", "ww", "pp", "qq"];
+      const foursTop = ["uiop",  "qwer", "poiu", "rewq"];
+      const doublesBottom = ["mm", "vv", ",,", "cc", "..", "xx", "//", "zz"];
+      const foursBottom = ["m,./", "zxcv", "/.,m", "vcxz"];
+      const doublesNumbers = ["11", "22", "33", "44", "55", "66", "77", "88", "99", "00"];
+      const foursNumbers = ["1234",  "5678", "4321", "8765", "9009", "0909"];
+
+      const combos = [...doublesHome, ...foursHome, ...doublesTop, ...foursTop, ...doublesBottom, ...foursBottom, ...doublesNumbers, ...foursNumbers];
+
+      this.keysToType = combos[this.level];
     }
   },
   mounted() {
