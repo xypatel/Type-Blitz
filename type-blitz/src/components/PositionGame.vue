@@ -65,7 +65,7 @@ display: inline-block;
   left: 47%;
   inline-size: 6em;
   height: 5em;
-  overflow-wrap: break-word;
+  overflow: hidden;
   letter-spacing: .5em;
 }
 </style>
