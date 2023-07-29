@@ -29,15 +29,20 @@ export default {
 
       console.log("PositionGame : " + event.key)
     },
-    async checkInput(){
+    checkInput(){
       if(this.keysEntered === this.keysToType){
         this.resultMatched = true;
         console.log("Correct!");
+        this.changeKeysToTypeRandomly()
       } else {
         this.resultMatched = false;
         console.log("Incorrect!");
       }
-      setTimeout(() => this.keysToType = "uiop", 1000);
+    },
+    changeKeysToTypeRandomly(){
+      const combos = ["asdf", "qwer", "zxcv", "jkl;", "uiop", "nm,.", "1234", "5678", "90", "-=", "[]\\"];
+      const randomIndex = Math.floor(Math.random() * combos.length);
+      this.keysToType = combos[randomIndex];
     }
   },
   mounted() {
@@ -56,7 +61,7 @@ export default {
   <div class="result">
     <p>{{keysEntered}}</p>
     <h1 v-if="resultMatched">&#9989</h1>
-    <h1 v-else-if="!resultMatched">&#10060</h1>
+    <h1 v-else-if="!resultMatched && keysEntered.length > 0">&#10060</h1>
   </div>
   <div id="inputKeyDisplay">
     <p>{{ inputKey }}</p>
@@ -114,7 +119,6 @@ display: inline-block;
   display: flex;
   width: fit-content;
   font-size: 5em;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
   position: absolute;
   top: 5em;
@@ -126,5 +130,6 @@ display: inline-block;
 .result p{
   padding-top: 1em;
   letter-spacing: 1em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 </style>
