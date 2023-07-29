@@ -33,3 +33,8 @@ npm run build
 ```sh
 npm run lint
 ```
+### Deploy to [Surge](https://surge.sh/)
+type-blitz.surge.sh
+```sh
+surge
+```
