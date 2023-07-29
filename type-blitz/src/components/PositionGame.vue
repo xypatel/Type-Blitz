@@ -16,8 +16,8 @@ export default {
     onKeyup(event) {
       this.inputKey = event.key;
 
-      if(this.inputString.length >= 5){
-        this.inputString = this.inputString.slice(1);
+      if(this.inputString.length >= 4 && event.key != "Backspace" && event.key != "Enter"){
+        this.inputString = "";
       }
 
       if(event.key == "Backspace"){
@@ -82,16 +82,21 @@ export default {
   <div class="time">
     <p>Time: {{ elapsedTime }} seconds</p>
   </div>
-  <div class="toType">
-    <p>{{ keysToType }}</p>
-  </div>
-  <div class="result">
-    <p>{{keysEntered}}</p>
-    <h1 v-if="resultMatched">&#9989</h1>
-    <h1 v-else-if="!resultMatched && keysEntered.length > 0">&#10060</h1>
-  </div>
+
   <div id="inputKeyDisplay">
     <p>{{ inputKey }}</p>
+  </div>
+
+  <div class="aboveBoard">
+    <div class="toType">
+      <p>{{ keysToType }}</p>
+    </div>
+
+    <div class="result">
+      <p>{{keysEntered}}</p>
+      <h1 v-if="resultMatched">&#9989</h1>
+      <h1 v-else-if="!resultMatched && keysEntered.length > 0">&#10060</h1>
+    </div>
   </div>
   <div id="inputString">
     <p>{{ inputString }}</p>
@@ -99,6 +104,11 @@ export default {
 </template>
 
 <style scoped>
+.aboveBoard{
+  position: relative;
+  bottom: 10em;
+  left: 25em;
+}
 #inputKeyDisplay{
   width: fit-content;
   font-size: 2em;
@@ -109,28 +119,24 @@ export default {
   right: 2em;
 }
 #inputString{
-display: inline-block;
   width: fit-content;
   font-size: 2em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
-  position: absolute;
-  top: 35em;
-  left: 47%;
   inline-size: 6em;
-  height: 5em;
+  height: 2em;
   letter-spacing: .5em;
+  position: relative;
+  top: 10em;
+  right: 17em;
 }
 .toType{
-  display: inline-block;
   text-align: center;
   font-size: 5em;
   font-family: Lucida Console, Courier, monospace;
   padding-left: .25em;
   color: white;
   position: absolute;
-  top: 8em;
-  left: 35%;
   inline-size: 6em;
   height: fit-content;
   overflow: hidden;
@@ -143,11 +149,11 @@ display: inline-block;
   width: fit-content;
   font-size: 2em;
   color: white;
-  position: absolute;
-  bottom: 35em;
-  left: 45%;
   inline-size: 6em;
   height: fit-content;
+  position: relative;
+  top: 5em;
+  left: 5em;
 }
 
 .result p{
@@ -168,7 +174,7 @@ display: inline-block;
   font-size: 1em;
   color: white;
   position: absolute;
-  top: 1em;
+  top: 3em;
   left: 2em;
   height: fit-content;
 }
