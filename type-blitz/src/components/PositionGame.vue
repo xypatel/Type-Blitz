@@ -8,6 +8,8 @@ export default {
       resultMatched: false,
       keysEntered: "",
       level: -1,
+      startTime: null,
+      elapsedTime: 0,
     };
   },
   methods: {
@@ -15,13 +17,14 @@ export default {
       this.inputKey = event.key;
 
       if(this.inputString.length >= 5){
-        this.inputString = "";
+        this.inputString = this.inputString.slice(1);
       }
 
       if(event.key == "Backspace"){
         this.inputString = this.inputString.slice(0, -1);
       } else if(event.key == "Enter"){
         this.keysEntered = this.inputString;
+        this.updateElapsedTime();
         this.checkInput();
         this.inputString = "";
       } else if(event.key != "Shift" && event.key != "Tab"){
@@ -59,10 +62,15 @@ export default {
       const combos = [...doublesHome, ...foursHome, ...doublesTop, ...foursTop, ...doublesBottom, ...foursBottom, ...doublesNumbers, ...foursNumbers];
 
       this.keysToType = combos[this.level];
+    },
+    updateElapsedTime () {
+      const currentTime = new Date().getTime();
+      this.elapsedTime = (currentTime - this.startTime) / 1000;
     }
   },
   mounted() {
     document.addEventListener("keyup", this.onKeyup);
+    this.startTime = new Date().getTime()
   },
   beforeDestroy() {
     document.removeEventListener("keyup", this.onKeyup);
@@ -71,6 +79,9 @@ export default {
 </script>
 
 <template>
+  <div class="time">
+    <p>Time: {{ elapsedTime }} seconds</p>
+  </div>
   <div class="toType">
     <p>{{ keysToType }}</p>
   </div>
@@ -146,5 +157,15 @@ display: inline-block;
   padding-top: 1em;
   letter-spacing: 1em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.time{
+  width: fit-content;
+  font-size: 1em;
+  color: white;
+  position: absolute;
+  top: 1em;
+  left: 2em;
+  height: fit-content;
 }
 </style>
