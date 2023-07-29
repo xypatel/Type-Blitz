@@ -127,7 +127,7 @@ display: inline-block;
   font-size: 5em;
   font-family: Lucida Console, Courier, monospace;
   padding-left: .25em;
-  color: deepskyblue;
+  color: white;
   position: absolute;
   top: 8em;
   left: 35%;
@@ -135,20 +135,17 @@ display: inline-block;
   height: fit-content;
   overflow: hidden;
   letter-spacing: 1em;
-  border-style: dashed;
-  border-width: 2px;
-  border-radius: .5em;
-  border-color: limegreen;
+  text-shadow: 1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod;
 }
 
 .result{
-  display: flex;
+  display: inline-flex;
   width: fit-content;
-  font-size: 3em;
+  font-size: 2em;
   color: white;
   position: absolute;
-  top: 10em;
-  left: 40%;
+  bottom: 35em;
+  left: 45%;
   inline-size: 6em;
   height: fit-content;
 }
@@ -157,6 +154,13 @@ display: inline-block;
   padding-top: 1em;
   letter-spacing: 1em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color : rgba(255, 255, 255, 0.1);
+}
+
+.result h1{
+  margin-left: 10%;
+  padding-top: 1em;
+  font-size: 1em;
 }
 
 .time{
