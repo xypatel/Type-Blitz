@@ -14,7 +14,7 @@ export default {
     onKeyup(event) {
       this.inputKey = event.key;
 
-      if(this.inputString.length > 5){
+      if(this.inputString.length >= 5){
         this.inputString = "";
       }
 
@@ -108,7 +108,6 @@ display: inline-block;
   left: 47%;
   inline-size: 6em;
   height: 5em;
-  overflow: hidden;
   letter-spacing: .5em;
 }
 .toType{
