@@ -54,7 +54,7 @@ export default {
       const doublesBottom = ["mm", "vv", ",,", "cc", "..", "xx", "//", "zz"];
       const foursBottom = ["m,./", "zxcv", "/.,m", "vcxz"];
       const doublesNumbers = ["11", "22", "33", "44", "55", "66", "77", "88", "99", "00"];
-      const foursNumbers = ["1234",  "5678", "4321", "8765", "9009", "0909"];
+      const foursNumbers = ["1234",  "2345", "6789", "6789", "7890"];
 
       const combos = [...doublesHome, ...foursHome, ...doublesTop, ...foursTop, ...doublesBottom, ...foursBottom, ...doublesNumbers, ...foursNumbers];
 
