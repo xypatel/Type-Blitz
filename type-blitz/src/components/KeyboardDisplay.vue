@@ -36,10 +36,16 @@ export default {
       const keyElement = document.getElementById(keyPressed);
 
       keyElement.classList.add("hit")
+      keyElement.classList.add("selected")
       keyElement.addEventListener('animationend', () => {
         keyElement.classList.remove("hit")
       })
-
+      if(event.key == "Enter") {
+        let selectedElements = document.getElementsByClassName("selected")
+        while(selectedElements.length > 0){
+          selectedElements[0].classList.remove("selected")
+        }
+      }
     }
   },
   mounted() {
