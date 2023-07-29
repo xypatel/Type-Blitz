@@ -18,7 +18,7 @@ export default {
         this.inputString = this.inputString.slice(0, -1);
       } else if(event.key == "Enter"){
         this.inputString = "";
-      } else {
+      } else if(event.key != "Shift" && event.key != "Tab"){
         this.inputString += event.key;
       }
 
