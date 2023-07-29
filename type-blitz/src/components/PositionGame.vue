@@ -4,6 +4,8 @@ export default {
     return {
       inputKey: "",
       inputString:"",
+      keysToType:"jkl;",
+      resultMatched: false,
     };
   },
   methods: {
@@ -17,14 +19,24 @@ export default {
       if(event.key == "Backspace"){
         this.inputString = this.inputString.slice(0, -1);
       } else if(event.key == "Enter"){
+        this.checkInput();
         this.inputString = "";
       } else if(event.key != "Shift" && event.key != "Tab"){
         this.inputString += event.key;
       }
 
-
-      console.log("game : " + event.key)
+      console.log("PositionGame : " + event.key)
     },
+    async checkInput(){
+      if(this.inputString === this.keysToType){
+        this.resultMatched = true;
+        console.log("Correct!");
+      } else {
+        this.resultMatched = false;
+        console.log("Incorrect!");
+      }
+      setTimeout(() => this.resultMatched = false, 1500);
+    }
   },
   mounted() {
     document.addEventListener("keyup", this.onKeyup);
@@ -36,6 +48,13 @@ export default {
 </script>
 
 <template>
+  <div class="toType">
+    <p>{{ keysToType }}</p>
+  </div>
+  <div class="result">
+    <h1 v-if="resultMatched">&#9989</h1>
+    <h1 v-else-if="!resultMatched">&#10060</h1>
+  </div>
   <div id="inputKeyDisplay">
     <p>{{ inputKey }}</p>
   </div>
@@ -63,6 +82,35 @@ display: inline-block;
   position: absolute;
   top: 35em;
   left: 47%;
+  inline-size: 6em;
+  height: 5em;
+  overflow: hidden;
+  letter-spacing: .5em;
+}
+.toType{
+  display: inline-block;
+  width: fit-content;
+  font-size: 5em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: magenta;
+  position: absolute;
+  top: 5em;
+  left: 45%;
+  inline-size: 6em;
+  height: 5em;
+  overflow: hidden;
+  letter-spacing: .5em;
+}
+
+.result{
+  display: inline-block;
+  width: fit-content;
+  font-size: 5em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+  position: absolute;
+  top: 2em;
+  left: 45%;
   inline-size: 6em;
   height: 5em;
   overflow: hidden;
