@@ -35,7 +35,7 @@ export default {
         this.resultMatched = false;
         console.log("Incorrect!");
       }
-      setTimeout(() => this.resultMatched = false, 1500);
+      setTimeout(() => this.resultMatched = false, 1000);
     }
   },
   mounted() {
@@ -91,15 +91,15 @@ display: inline-block;
   display: inline-block;
   width: fit-content;
   font-size: 5em;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: magenta;
+  font-family: Lucida Console, Courier, monospace;
+  color: deepskyblue;
   position: absolute;
-  top: 5em;
-  left: 45%;
+  top: 8em;
+  left: 40%;
   inline-size: 6em;
   height: 5em;
   overflow: hidden;
-  letter-spacing: .5em;
+  letter-spacing: 1em;
 }
 
 .result{
@@ -109,8 +109,8 @@ display: inline-block;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
   position: absolute;
-  top: 2em;
-  left: 45%;
+  top: 5em;
+  left: 47%;
   inline-size: 6em;
   height: 5em;
   overflow: hidden;
