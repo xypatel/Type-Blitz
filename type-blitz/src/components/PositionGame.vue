@@ -118,11 +118,11 @@ display: inline-block;
 .result{
   display: flex;
   width: fit-content;
-  font-size: 5em;
+  font-size: 3em;
   color: white;
   position: absolute;
-  top: 5em;
-  left: 33%;
+  top: 10em;
+  left: 40%;
   inline-size: 6em;
   height: fit-content;
 }
