@@ -153,7 +153,7 @@ export default {
   height: fit-content;
   position: relative;
   top: 5em;
-  left: 5em;
+  left: 4em;
 }
 
 .result p{
