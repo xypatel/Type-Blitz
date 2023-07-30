@@ -89,7 +89,7 @@ export default {
 
   <div class="aboveBoard">
     <div class="toType">
-      <p>{{ keysToType }}</p>
+      <p v-for="char in keysToType" :key="char">{{ char }}</p>
     </div>
 
     <div class="result">
@@ -131,17 +131,23 @@ export default {
   right: 17em;
 }
 .toType{
+  display: flex;
+  width: 1em;
   text-align: center;
   font-size: 5em;
   font-family: Lucida Console, Courier, monospace;
-  padding-left: .25em;
   color: white;
   position: absolute;
+  right: 8em;
   inline-size: 6em;
   height: fit-content;
-  overflow: hidden;
   letter-spacing: 1em;
   text-shadow: 1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod;
+}
+
+.toType p{
+  margin: auto;
+  padding-left: .1em;
 }
 
 .result{
