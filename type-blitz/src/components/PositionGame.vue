@@ -18,6 +18,10 @@ export default {
 
       if(this.inputString.length >= 4 && event.key != "Backspace" && event.key != "Enter"){
         this.inputString = "";
+        const charToType = document.getElementsByClassName("toType")[0].children;
+        for(let i = 0; i < charToType.length; i++){
+          charToType[i].style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
+        }
       }
 
       if(event.key == "Backspace"){
