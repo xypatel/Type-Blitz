@@ -126,9 +126,9 @@ export default {
     <p>{{ inputKey }}</p>
   </div>
   <div class="result">
-    <p>{{keysEntered}}</p>
     <h1 v-if="resultMatched">&#9989</h1>
     <h1 v-else-if="!resultMatched && keysEntered.length > 0">&#10060</h1>
+    <p>{{keysEntered}}</p>
   </div>
 
   <div class="aboveBoard">
@@ -198,20 +198,20 @@ export default {
   inline-size: 6em;
   height: fit-content;
   position: absolute;
-  right: 2em;
+  right: 1em;
   bottom: 1em;
 }
 
 .result p{
   padding-top: 1em;
-  letter-spacing: 1em;
+  letter-spacing: .5em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color : rgba(255, 255, 255, 0.1);
 }
 
 .result h1{
-  margin-left: 10%;
   padding-top: 1em;
+  padding-right: 1em;
   font-size: 1em;
 }
 
