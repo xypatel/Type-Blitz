@@ -159,8 +159,7 @@ body {
 .keyboard {
   display: flex;
   flex-direction: column;
-  margin: auto;
-  padding-right: 10em;
+  margin: auto 10em auto auto;
 }
 
 .row {
