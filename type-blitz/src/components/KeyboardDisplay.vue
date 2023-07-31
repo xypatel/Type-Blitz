@@ -33,13 +33,31 @@ export default {
         }
       }
 
-      const keyElement = document.getElementById(keyPressed);
+      if(keyPressed == "Shift"){
+        const keyElement = document.getElementsByClassName("Shift");
+        keyElement[0].classList.add("hit")
+        keyElement[0].classList.add("selected");
+        keyElement[1].classList.add("hit")
+        keyElement[1].classList.add("selected");
+        keyElement[0].addEventListener('animationend', () => {
+          keyElement[0].classList.remove("hit")
+        })
+        keyElement[1].addEventListener('animationend', () => {
+          keyElement[1].classList.remove("hit")
+        })
+        setTimeout(() => {
+          keyElement[0].classList.remove("selected")
+          keyElement[1].classList.remove("selected")
+        }, 1000)
+      } else {
+        const keyElement = document.getElementById(keyPressed);
 
-      keyElement.classList.add("hit")
-      keyElement.classList.add("selected")
-      keyElement.addEventListener('animationend', () => {
-        keyElement.classList.remove("hit")
-      })
+        keyElement.classList.add("hit")
+        keyElement.classList.add("selected")
+        keyElement.addEventListener('animationend', () => {
+          keyElement.classList.remove("hit")
+        })
+      }
       if(event.key == "Enter") {
         let selectedElements = document.getElementsByClassName("selected")
         while(selectedElements.length > 0){
@@ -108,7 +126,7 @@ export default {
       <li class="pinky" id="Enter">ENTER</li>
     </ul>
     <ul class="row row-3">
-      <li class="pinky" id="Shift">SHIFT</li>
+      <li class="pinky Shift" id="Shift">SHIFT</li>
       <li class="pinky" id="Z">Z</li>
       <li class="ring" id="X">X</li>
       <li class="middle" id="C">C</li>
@@ -119,7 +137,7 @@ export default {
       <li class="middle" id="Comma">,</li>
       <li class="ring" id="Period">.</li>
       <li class="pinky" id="Forwardslash">/</li>
-      <li class="pinky" id="Shift">SHIFT</li>
+      <li class="pinky Shift" id="Shift">SHIFT</li>
     </ul>
   </div>
 <!--  <h1 class="title">Hands on the keyboard</h1>-->
