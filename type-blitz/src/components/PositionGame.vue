@@ -198,7 +198,7 @@ export default {
   inline-size: 6em;
   height: fit-content;
   position: absolute;
-  right: 3em;
+  right: 2em;
   bottom: 1em;
 }
 
