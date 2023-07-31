@@ -168,7 +168,7 @@ export default {
   letter-spacing: .5em;
   position: absolute;
   bottom: 1em;
-  left: 47%;
+  left: 48%;
 }
 .toType{
   display: flex;
