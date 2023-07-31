@@ -16,7 +16,7 @@ export default {
     onKeyup(event) {
       this.inputKey = event.key;
 
-      this.handleInputStringToLong();
+      this.handleInputStringTooLong();
 
       if(event.key == "Backspace"){
         this.handleBackspaceKey();
@@ -28,7 +28,7 @@ export default {
 
       console.log("PositionGame : " + event.key)
     },
-    handleInputStringToLong(){
+    handleInputStringTooLong(){
       if(this.inputString.length >= 4 && event.key != "Backspace" && event.key != "Enter"){
         this.inputString = "";
         this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
