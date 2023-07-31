@@ -16,36 +16,48 @@ export default {
     onKeyup(event) {
       this.inputKey = event.key;
 
+      this.handleInputStringToLong();
+
+      if(event.key == "Backspace"){
+        this.handleBackspaceKey();
+      } else if(event.key == "Enter"){
+        this.handleEnterKey();
+      } else if(event.key != "Shift" && event.key != "Tab"){
+        this.handleValidInputKey();
+      }
+
+      console.log("PositionGame : " + event.key)
+    },
+    handleInputStringToLong(){
       if(this.inputString.length >= 4 && event.key != "Backspace" && event.key != "Enter"){
         this.inputString = "";
         this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
       }
-
-      if(event.key == "Backspace"){
-        const charToRemove = this.inputString.charAt(this.inputString.length - 1);
-        if(this.keysToType.charAt(this.inputString.length - 1) == charToRemove){
-          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-          this.glowInputKeyYellow(lastKeyToTypeElement);
-        }
-        this.inputString = this.inputString.slice(0, -1);
-      } else if(event.key == "Enter"){
-        this.keysEntered = this.inputString;
-        this.updateElapsedTime();
-        this.checkInput();
-        this.inputString = "";
-        this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
-      } else if(event.key != "Shift" && event.key != "Tab"){
-        this.inputString += event.key;
-        if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
-          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-          this.glowInputKeyGreen(lastKeyToTypeElement);
-        } else {
-          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-          this.glowInputKeyRed(lastKeyToTypeElement);
-        }
+    },
+    handleBackspaceKey(){
+      const charToRemove = this.inputString.charAt(this.inputString.length - 1);
+      if(this.keysToType.charAt(this.inputString.length - 1) == charToRemove){
+        const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+        this.glowInputKeyYellow(lastKeyToTypeElement);
       }
-
-      console.log("PositionGame : " + event.key)
+      this.inputString = this.inputString.slice(0, -1);
+    },
+    handleEnterKey(){
+      this.keysEntered = this.inputString;
+      this.updateElapsedTime();
+      this.checkInput();
+      this.inputString = "";
+      this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
+    },
+    handleValidInputKey(){
+      this.inputString += event.key;
+      if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
+        const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+        this.glowInputKeyGreen(lastKeyToTypeElement);
+      } else {
+        const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+        this.glowInputKeyRed(lastKeyToTypeElement);
+      }
     },
     glowKeysToTypeYellow(lettersToGlow) {
       for(let i = 0; i < lettersToGlow.length; i++){
