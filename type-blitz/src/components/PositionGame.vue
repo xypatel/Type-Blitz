@@ -24,8 +24,8 @@ export default {
       if(event.key == "Backspace"){
         const charToRemove = this.inputString.charAt(this.inputString.length - 1);
         if(this.keysToType.charAt(this.inputString.length - 1) == charToRemove){
-          const lastChar = this.inputString.length - 1;
-          this.glowInputKeyYellow(document.getElementsByClassName("toType")[0].children[lastChar]);
+          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+          this.glowInputKeyYellow(lastKeyToTypeElement);
         }
         this.inputString = this.inputString.slice(0, -1);
       } else if(event.key == "Enter"){
@@ -37,12 +37,11 @@ export default {
       } else if(event.key != "Shift" && event.key != "Tab"){
         this.inputString += event.key;
         if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
-          const correct = this.inputString.length - 1;
-          this.glowInputKeyGreen(document.getElementsByClassName("toType")[0].children[correct]);
+          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+          this.glowInputKeyGreen(lastKeyToTypeElement);
         } else {
-          const incorrect = this.inputString.length - 1;
-          this.glowInputKeyRed(document.getElementsByClassName("toType")[0].children[incorrect]);
-
+          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+          this.glowInputKeyRed(lastKeyToTypeElement);
         }
       }
 
@@ -60,7 +59,7 @@ export default {
       letterToGlow.style.textShadow = "1px 1px 2px black, 0 0 25px green, 0 0 10px limegreen";
     },
     glowInputKeyRed(letterToGlow) {
-      incorrectChar.style.textShadow = "1px 1px 2px black, 0 0 25px red, 0 0 10px crimson";
+      letterToGlow.style.textShadow = "1px 1px 2px black, 0 0 25px red, 0 0 10px crimson";
     },
     checkInput(){
       if(this.keysEntered === this.keysToType){
