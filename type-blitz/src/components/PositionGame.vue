@@ -47,6 +47,10 @@ export default {
           const correct = this.inputString.length - 1;
           const correctChar = document.getElementsByClassName("toType")[0].children[correct];
           correctChar.style.textShadow = "1px 1px 2px black, 0 0 25px green, 0 0 10px limegreen";
+        } else {
+          const incorrect = this.inputString.length - 1;
+          const incorrectChar = document.getElementsByClassName("toType")[0].children[incorrect];
+          incorrectChar.style.textShadow = "1px 1px 2px black, 0 0 25px red, 0 0 10px crimson";
         }
       }
 
@@ -64,7 +68,6 @@ export default {
       }
     },
     changeKeysToTypeRandomly(){
-      const combos = ["asdf", "qwer", "zxcv", "jkl;", "uiop", "nm,.", "1234", "5678", "90", "-=", "[]\\"];
       const randomIndex = Math.floor(Math.random() * combos.length);
       this.keysToType = combos[randomIndex];
     },
@@ -82,9 +85,11 @@ export default {
       const doublesNumbers = ["11", "22", "33", "44", "55", "66", "77", "88", "99", "00"];
       const foursNumbers = ["1234",  "2345", "6789", "7890"];
 
-      const combos = [...doublesHome, ...foursHome, ...doublesTop, ...foursTop, ...doublesBottom, ...foursBottom, ...doublesNumbers, ...foursNumbers];
+      const combos = [
+          ...doublesHome, ...foursHome, ...doublesTop, ...foursTop, ...doublesBottom,
+          ...foursBottom, ...doublesNumbers, ...foursNumbers
+      ];
 
-      // reverse the fours combos
       const combosReversed = [];
       for(let i = 0; i < combos.length; i++){
         if(combos[i].length == 4){
