@@ -18,18 +18,14 @@ export default {
 
       if(this.inputString.length >= 4 && event.key != "Backspace" && event.key != "Enter"){
         this.inputString = "";
-        const charToType = document.getElementsByClassName("toType")[0].children;
-        for(let i = 0; i < charToType.length; i++){
-          charToType[i].style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
-        }
+        this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
       }
 
       if(event.key == "Backspace"){
         const charToRemove = this.inputString.charAt(this.inputString.length - 1);
         if(this.keysToType.charAt(this.inputString.length - 1) == charToRemove){
-          const correct = this.inputString.length - 1;
-          const correctChar = document.getElementsByClassName("toType")[0].children[correct];
-          correctChar.style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
+          const lastChar = this.inputString.length - 1;
+          this.glowInputKeyYellow(document.getElementsByClassName("toType")[0].children[lastChar]);
         }
         this.inputString = this.inputString.slice(0, -1);
       } else if(event.key == "Enter"){
@@ -37,24 +33,34 @@ export default {
         this.updateElapsedTime();
         this.checkInput();
         this.inputString = "";
-        const charToType = document.getElementsByClassName("toType")[0].children;
-        for(let i = 0; i < charToType.length; i++){
-          charToType[i].style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
-        }
+        this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
       } else if(event.key != "Shift" && event.key != "Tab"){
         this.inputString += event.key;
         if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
           const correct = this.inputString.length - 1;
-          const correctChar = document.getElementsByClassName("toType")[0].children[correct];
-          correctChar.style.textShadow = "1px 1px 2px black, 0 0 25px green, 0 0 10px limegreen";
+          this.glowInputKeyGreen(document.getElementsByClassName("toType")[0].children[correct]);
         } else {
           const incorrect = this.inputString.length - 1;
-          const incorrectChar = document.getElementsByClassName("toType")[0].children[incorrect];
-          incorrectChar.style.textShadow = "1px 1px 2px black, 0 0 25px red, 0 0 10px crimson";
+          this.glowInputKeyRed(document.getElementsByClassName("toType")[0].children[incorrect]);
+
         }
       }
 
       console.log("PositionGame : " + event.key)
+    },
+    glowKeysToTypeYellow(lettersToGlow) {
+      for(let i = 0; i < lettersToGlow.length; i++){
+        lettersToGlow[i].style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
+      }
+    },
+    glowInputKeyYellow(letterToGlow) {
+      letterToGlow.style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
+    },
+    glowInputKeyGreen(letterToGlow) {
+      letterToGlow.style.textShadow = "1px 1px 2px black, 0 0 25px green, 0 0 10px limegreen";
+    },
+    glowInputKeyRed(letterToGlow) {
+      incorrectChar.style.textShadow = "1px 1px 2px black, 0 0 25px red, 0 0 10px crimson";
     },
     checkInput(){
       if(this.keysEntered === this.keysToType){
