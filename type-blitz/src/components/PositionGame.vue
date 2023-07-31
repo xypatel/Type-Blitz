@@ -21,14 +21,29 @@ export default {
       }
 
       if(event.key == "Backspace"){
+        const charToRemove = this.inputString.charAt(this.inputString.length - 1);
+        if(this.keysToType.charAt(this.inputString.length - 1) == charToRemove){
+          const correct = this.inputString.length - 1;
+          const correctChar = document.getElementsByClassName("toType")[0].children[correct];
+          correctChar.style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
+        }
         this.inputString = this.inputString.slice(0, -1);
       } else if(event.key == "Enter"){
         this.keysEntered = this.inputString;
         this.updateElapsedTime();
         this.checkInput();
         this.inputString = "";
+        const charToType = document.getElementsByClassName("toType")[0].children;
+        for(let i = 0; i < charToType.length; i++){
+          charToType[i].style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
+        }
       } else if(event.key != "Shift" && event.key != "Tab"){
         this.inputString += event.key;
+        if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
+          const correct = this.inputString.length - 1;
+          const correctChar = document.getElementsByClassName("toType")[0].children[correct];
+          correctChar.style.textShadow = "1px 1px 2px black, 0 0 25px green, 0 0 5px limegreen";
+        }
       }
 
       console.log("PositionGame : " + event.key)
@@ -89,7 +104,7 @@ export default {
 
   <div class="aboveBoard">
     <div class="toType">
-      <p v-for="char in keysToType" :key="char">{{ char }}</p>
+      <p v-for="(char, index) in keysToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
 
     <div class="result">
@@ -142,12 +157,12 @@ export default {
   inline-size: 6em;
   height: fit-content;
   letter-spacing: 1em;
-  text-shadow: 1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod;
 }
 
 .toType p{
   margin: auto;
   padding-left: .1em;
+  text-shadow: 1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod;
 }
 
 .result{
