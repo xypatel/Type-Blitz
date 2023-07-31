@@ -46,7 +46,7 @@ export default {
         if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
           const correct = this.inputString.length - 1;
           const correctChar = document.getElementsByClassName("toType")[0].children[correct];
-          correctChar.style.textShadow = "1px 1px 2px black, 0 0 25px green, 0 0 5px limegreen";
+          correctChar.style.textShadow = "1px 1px 2px black, 0 0 25px green, 0 0 10px limegreen";
         }
       }
 
