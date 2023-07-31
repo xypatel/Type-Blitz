@@ -59,6 +59,9 @@ export default {
     checkInput(){
       if(this.keysEntered === this.keysToType){
         this.resultMatched = true;
+        if(this.keysEntered === "fj"){
+          this.startTime = new Date().getTime();
+        }
         console.log("Correct!");
         this.level++;
         this.changeKeysToTypeByLevel();
@@ -99,13 +102,14 @@ export default {
       return [...combos, ...combosReversed];
     },
     updateElapsedTime () {
-      const currentTime = new Date().getTime();
-      this.elapsedTime = (currentTime - this.startTime) / 1000;
+      if(this.keysToType != "fj"){
+        const currentTime = new Date().getTime();
+        this.elapsedTime = (currentTime - this.startTime) / 1000;
+      }
     }
   },
   mounted() {
     document.addEventListener("keyup", this.onKeyup);
-    this.startTime = new Date().getTime()
   },
   beforeDestroy() {
     document.removeEventListener("keyup", this.onKeyup);
