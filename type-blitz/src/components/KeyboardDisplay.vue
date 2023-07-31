@@ -160,7 +160,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: auto;
-  //padding-left: 10em;
+  padding-right: 10em;
 }
 
 .row {

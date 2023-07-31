@@ -12,8 +12,4 @@ import PositionGame from "@/components/PositionGame.vue";
 </template>
 
 <style scoped>
-.keyboard {
-  position: relative;
-  right: 10em;
-}
 </style>
