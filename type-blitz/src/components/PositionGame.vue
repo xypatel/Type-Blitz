@@ -125,18 +125,19 @@ export default {
   <div id="inputKeyDisplay">
     <p>{{ inputKey }}</p>
   </div>
+  <div class="result">
+    <p>{{keysEntered}}</p>
+    <h1 v-if="resultMatched">&#9989</h1>
+    <h1 v-else-if="!resultMatched && keysEntered.length > 0">&#10060</h1>
+  </div>
 
   <div class="aboveBoard">
     <div class="toType">
       <p v-for="(char, index) in keysToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
 
-    <div class="result">
-      <p>{{keysEntered}}</p>
-      <h1 v-if="resultMatched">&#9989</h1>
-      <h1 v-else-if="!resultMatched && keysEntered.length > 0">&#10060</h1>
-    </div>
   </div>
+
   <div id="inputString">
     <p>{{ inputString }}</p>
   </div>
@@ -165,9 +166,9 @@ export default {
   inline-size: 6em;
   height: 2em;
   letter-spacing: .5em;
-  position: relative;
-  top: 10em;
-  right: 17em;
+  position: absolute;
+  bottom: 1em;
+  left: 47%;
 }
 .toType{
   display: flex;
@@ -177,7 +178,7 @@ export default {
   font-family: Lucida Console, Courier, monospace;
   color: white;
   position: absolute;
-  right: 8em;
+  left: 1em;
   inline-size: 6em;
   height: fit-content;
   letter-spacing: 1em;
@@ -196,9 +197,9 @@ export default {
   color: white;
   inline-size: 6em;
   height: fit-content;
-  position: relative;
-  top: 5em;
-  left: 4em;
+  position: absolute;
+  right: 3em;
+  bottom: 1em;
 }
 
 .result p{
@@ -219,7 +220,7 @@ export default {
   font-size: 1em;
   color: white;
   position: absolute;
-  top: 3em;
+  top: 2em;
   left: 2em;
   height: fit-content;
 }
