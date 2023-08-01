@@ -10,6 +10,7 @@ export default {
       level: -1,
       startTime: null,
       elapsedTime: 0,
+      totalTimes:[]
     };
   },
   methods: {
@@ -25,8 +26,6 @@ export default {
       } else if(event.key != "Shift" && event.key != "Tab"){
         this.handleValidInputKey();
       }
-
-      console.log("PositionGame : " + event.key)
     },
     handleInputStringTooLong(){
       if(this.inputString.length >= 4 && event.key != "Backspace" && event.key != "Enter"){
@@ -94,6 +93,9 @@ export default {
     changeKeysToTypeByLevel(){
       const combos = this.createKeyCombos();
       this.keysToType = combos[this.level];
+      if(this.level == combos.length){
+        this.resetGame();
+      }
     },
     createKeyCombos(){
       const doublesHome = ["ff", "jj", "dd", "kk", "ss", "ll", "aa", ";;", "gg", "hh"];
@@ -123,6 +125,14 @@ export default {
         const currentTime = new Date().getTime();
         this.elapsedTime = (currentTime - this.startTime) / 1000;
       }
+    },
+    resetGame(){
+      this.totalTimes.push(this.elapsedTime);
+      setTimeout(() => {
+        this.level = -1;
+        this.keysToType = "fj";
+        this.elapsedTime = 0;
+      }, 3000);
     }
   },
   mounted() {
@@ -137,6 +147,10 @@ export default {
 <template>
   <div class="time">
     <p>Time: {{ elapsedTime }} seconds</p>
+  </div>
+  <div class="totalTimes" v-if="this.totalTimes.length != 0">
+    <h2>Score</h2>
+    <p v-for="(totalTime, index) in totalTimes">{{ index + 1 }}) {{ totalTime }} Seconds</p>
   </div>
 
   <div id="inputKeyDisplay">
@@ -238,6 +252,16 @@ export default {
   color: white;
   position: absolute;
   top: 2em;
+  left: 2em;
+  height: fit-content;
+}
+
+.totalTimes {
+  width: fit-content;
+  font-size: 1em;
+  color: white;
+  position: absolute;
+  top: 4em;
   left: 2em;
   height: fit-content;
 }
