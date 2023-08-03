@@ -10,7 +10,8 @@ export default {
       level: -1,
       startTime: null,
       elapsedTime: 0,
-      totalTimes:[]
+      totalTimes:[],
+      gameFinished: false
     };
   },
   methods: {
@@ -127,12 +128,14 @@ export default {
       }
     },
     resetGame(){
+      this.gameFinished = true;
       this.totalTimes.push(this.elapsedTime);
       setTimeout(() => {
+        this.gameFinished = false;
         this.level = -1;
         this.keysToType = "fj";
         this.elapsedTime = 0;
-      }, 3000);
+      }, 5000);
     }
   },
   mounted() {
@@ -148,6 +151,7 @@ export default {
   <div class="time">
     <p>Time: {{ elapsedTime }} seconds</p>
   </div>
+
   <div class="totalTimes" v-if="this.totalTimes.length != 0">
     <h2>Score</h2>
     <p v-for="(totalTime, index) in totalTimes">{{ index + 1 }}) {{ totalTime }} Seconds</p>
@@ -162,16 +166,17 @@ export default {
     <p>{{keysEntered}}</p>
   </div>
 
-  <div class="aboveBoard">
-    <div class="toType">
+  <div class="aboveBoard" >
+    <div class="toType" v-if="!gameFinished">
       <p v-for="(char, index) in keysToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
-
+    <p id="gameDone" v-if="gameFinished">Game Finished in {{totalTimes[totalTimes.length - 1]}} Seconds</p>
   </div>
 
   <div id="inputString">
     <p>{{ inputString }}</p>
   </div>
+
 </template>
 
 <style scoped>
@@ -180,6 +185,19 @@ export default {
   bottom: 10em;
   left: 25em;
 }
+
+#gameDone {
+  font-size: 2em;
+  font-family: Lucida Console, Courier, monospace;
+  color: white;
+  text-shadow: 2px 2px 10px turquoise;
+  position: relative;
+  text-align: center;
+  bottom: 20%;
+  left: 85%;
+}
+
+
 #inputKeyDisplay{
   width: fit-content;
   font-size: 2em;
