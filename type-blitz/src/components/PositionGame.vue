@@ -170,7 +170,7 @@ export default {
     <div class="toType" v-if="!gameFinished">
       <p v-for="(char, index) in keysToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
-    <p id="gameDone" v-if="gameFinished">Game Finished in {{totalTimes[totalTimes.length - 1]}} Seconds</p>
+    <p id="gameDone" v-if="gameFinished">Finished in {{totalTimes[totalTimes.length - 1]}} Seconds</p>
   </div>
 
   <div id="inputString">
