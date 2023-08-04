@@ -11,25 +11,7 @@ export default {
       this.bumpKey(event);
     },
     bumpKey(event) {
-      let keyPressed;
-
-      if (event.keyCode >= 48 && event.keyCode <= 90) {
-        keyPressed = String.fromCharCode(event.keyCode);
-      } else {
-        keyPressed = event.key;
-        switch (keyPressed) {
-          case '\-' : keyPressed = "Minus"; break;
-          case '\=' : keyPressed = "Equal"; break;
-          case '\\' : keyPressed = "Backslash"; break;
-          case '\]' : keyPressed = "CloseBracket"; break;
-          case '\[' : keyPressed = "OpenBracket"; break;
-          case '\;' : keyPressed = "SemiColon"; break;
-          case '\'' : keyPressed = "Quote"; break;
-          case '\,' : keyPressed = "Comma"; break;
-          case '\.' : keyPressed = "Period"; break;
-          case '\/' : keyPressed = "Forwardslash"; break;
-        }
-      }
+      let keyPressed = this.handleInputKey(event);
 
       if(keyPressed == "Shift"){
         const keyElement = document.getElementsByClassName("Shift");
@@ -62,6 +44,27 @@ export default {
           selectedElements[0].classList.remove("selected")
         }
       }
+    },
+    handleInputKey(event){
+      let keyPressed;
+      if (event.keyCode >= 48 && event.keyCode <= 90) {
+        keyPressed = String.fromCharCode(event.keyCode);
+      } else {
+        keyPressed = event.key;
+        switch (keyPressed) {
+          case '\-' : keyPressed = "Minus"; break;
+          case '\=' : keyPressed = "Equal"; break;
+          case '\\' : keyPressed = "Backslash"; break;
+          case '\]' : keyPressed = "CloseBracket"; break;
+          case '\[' : keyPressed = "OpenBracket"; break;
+          case '\;' : keyPressed = "SemiColon"; break;
+          case '\'' : keyPressed = "Quote"; break;
+          case '\,' : keyPressed = "Comma"; break;
+          case '\.' : keyPressed = "Period"; break;
+          case '\/' : keyPressed = "Forwardslash"; break;
+        }
+      }
+      return keyPressed;
     }
   },
   mounted() {
