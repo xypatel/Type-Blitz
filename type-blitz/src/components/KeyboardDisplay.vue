@@ -11,7 +11,7 @@ export default {
       this.bumpKey(event);
     },
     bumpKey(event) {
-      let keyPressed = this.handleInputKey(event);
+      let keyPressed = this.getPressedKeyName(event);
 
       if(keyPressed == "Shift"){
         const keyElement = document.getElementsByClassName("Shift");
@@ -45,7 +45,7 @@ export default {
         }
       }
     },
-    handleInputKey(event){
+    getPressedKeyName(event){
       let keyPressed;
       if (event.keyCode >= 48 && event.keyCode <= 90) {
         keyPressed = String.fromCharCode(event.keyCode);
