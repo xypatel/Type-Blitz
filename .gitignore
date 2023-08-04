@@ -1,0 +1,28 @@
+# Logs
+type-blitz/logs
+*.log
+type-blitz/npm-debug.log*
+type-blitz/yarn-debug.log*
+type-blitz/yarn-error.log*
+type-blitz/pnpm-debug.log*
+type-blitz/lerna-debug.log*
+
+type-blitz/node_modules
+type-blitz/.DS_Store
+type-blitz/dist
+type-blitz/dist-ssr
+type-blitz/coverage
+*.local
+
+type-blitz/cypress/videos/
+type-blitz/cypress/screenshots/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.idea
