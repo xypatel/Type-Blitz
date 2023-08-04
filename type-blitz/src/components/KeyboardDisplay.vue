@@ -11,14 +11,12 @@ export default {
       this.bumpKey(event);
     },
     bumpKey(event) {
-      console.log("event.keyCode: " + event.key)
-      let keyPressed = String.fromCharCode(event.keyCode);
+      let keyPressed;
 
       if (event.keyCode >= 48 && event.keyCode <= 90) {
-        console.log("Letter Or Number: " + keyPressed);
+        keyPressed = String.fromCharCode(event.keyCode);
       } else {
         keyPressed = event.key;
-        console.log("Not a letter or number key: " + keyPressed);
         switch (keyPressed) {
           case '\-' : keyPressed = "Minus"; break;
           case '\=' : keyPressed = "Equal"; break;
