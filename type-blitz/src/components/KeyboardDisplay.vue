@@ -2,12 +2,10 @@
 export default {
   data() {
     return {
-      input: "",
     };
   },
   methods: {
     onKeyup(event) {
-      this.input = event.key;
       this.bumpKey(event);
     },
     bumpKey(event) {
