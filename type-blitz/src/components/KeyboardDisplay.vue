@@ -235,9 +235,8 @@ export default {
 <style scoped>
 
 .dropdown {
-  position: absolute;
-  top: 58%;
-  left: 48.5%;
+  position: relative;
+  left: 40%;
   font-family: "Lucida Console";
 }
 
