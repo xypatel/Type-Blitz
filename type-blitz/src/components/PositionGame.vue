@@ -35,11 +35,8 @@ export default {
       }
     },
     handleBackspaceKey(){
-      const charToRemove = this.inputString.charAt(this.inputString.length - 1);
-      if(this.keysToType.charAt(this.inputString.length - 1) == charToRemove){
-        const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-        this.glowInputKeyYellow(lastKeyToTypeElement);
-      }
+      const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+      this.glowInputKeyYellow(lastKeyToTypeElement);
       this.inputString = this.inputString.slice(0, -1);
     },
     handleEnterKey(){
