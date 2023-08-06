@@ -11,12 +11,20 @@ export default {
   },
   methods: {
     setColors(colorScheme) {
-      const aqua = {
+      const classic = {
         pinkyColor: "hsl(210, 100%, 50%)",
         ringColor: "hsl(190, 100%, 50%)",
         middleColor: "hsl(171, 100%, 50%)",
         pointer1stColor: "hsl(155, 100%, 50%)",
         pointer2ndColor: "hsl(145, 100%, 50%)",
+      }
+
+      const aqua = {
+        pinkyColor: "hsl(220, 100%, 50%)",
+        ringColor: "hsl(220, 100%, 60%)",
+        middleColor: "hsl(200, 100%, 50%)",
+        pointer1stColor: "hsl(180, 100%, 60%)",
+        pointer2ndColor: "hsl(160, 100%, 60%)",
       }
 
       const fire = {
@@ -27,7 +35,39 @@ export default {
         pointer2ndColor: "hsl(40, 100%, 50%)",
       }
 
-      colorScheme = colorScheme == "aqua" ? aqua : fire;
+      const steel = {
+        pinkyColor: "hsl(0, 0%, 30%)",
+        ringColor: "hsl(0, 0%, 40%)",
+        middleColor: "hsl(0, 0%, 50%)",
+        pointer1stColor: "hsl(0, 0%, 60%)",
+        pointer2ndColor: "hsl(0, 0%, 80%)",
+      }
+
+      const bubblegum = {
+        pinkyColor: "hsl(330, 100%, 60%)",
+        ringColor: "hsl(330, 100%, 70%)",
+        middleColor: "hsl(330, 100%, 80%)",
+        pointer1stColor: "hsl(330, 100%, 85%)",
+        pointer2ndColor: "hsl(330, 100%, 90%)",
+      }
+
+      const desert = {
+        pinkyColor: "hsl(35, 80%, 60%)",
+        ringColor: "hsl(30, 90%, 60%)",
+        middleColor: "hsl(20, 90%, 70%)",
+        pointer1stColor: "hsl(30, 90%, 70%)",
+        pointer2ndColor: "hsl(30, 100%, 80%)",
+      }
+
+      switch (colorScheme) {
+        case "classic": colorScheme = classic; break;
+        case "aqua": colorScheme = aqua; break;
+        case "fire": colorScheme = fire; break;
+        case "steel": colorScheme = steel; break;
+        case "bubblegum": colorScheme = bubblegum; break;
+        case "desert": colorScheme = desert; break;
+        default: colorScheme = aqua; break;
+      }
 
       this.pinkyColor = colorScheme.pinkyColor;
       this.ringColor = colorScheme.ringColor;
@@ -182,8 +222,12 @@ export default {
 <div class="dropdown">
   <button class="dropbtn">Colors</button>
     <div class="dropdown-content">
+      <a href="#" @click="setColors('classic')" style="color: mediumspringgreen">Classic</a>
+      <a href="#" @click="setColors('steel')" style="color: grey">Steel</a>
       <a href="#" @click="setColors('aqua')" style="color: deepskyblue">Aqua</a>
       <a href="#" @click="setColors('fire')" style="color: orangered">Fire</a>
+      <a href="#" @click="setColors('bubblegum')" style="color: hotpink">BubbleGum</a>
+      <a href="#" @click="setColors('desert')" style="color: sandybrown">Desert</a>
     </div>
   </div>
 </template>
@@ -193,7 +237,7 @@ export default {
 .dropdown {
   position: absolute;
   top: 58%;
-  left: 48%;
+  left: 48.5%;
   font-family: "Lucida Console";
 }
 
@@ -201,8 +245,9 @@ export default {
   display: none;
   position: absolute;
   text-align: center;
-  padding-left: 5em;
+  padding-left: 1.8em;
   border-radius: 1em;
+  font-size: 1.5em;
 }
 
 .dropdown:hover .dropdown-content {
