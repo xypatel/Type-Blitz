@@ -29,7 +29,7 @@ export default {
       }
     },
     handleInputStringTooLong(){
-      if(this.inputString.length >= 4 && event.key != "Backspace" && event.key != "Enter"){
+      if(this.inputString.length >= this.keysToType.length && event.key != "Backspace" && event.key != "Enter"){
         this.inputString = "";
         this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
       }
