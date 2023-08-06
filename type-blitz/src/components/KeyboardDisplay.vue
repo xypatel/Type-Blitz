@@ -2,6 +2,11 @@
 export default {
   data() {
     return {
+      pinkyColor: "hsl(210, 100%, 50%)",
+      ringColor: "hsl(190, 100%, 50%)",
+      middleColor: "hsl(171, 100%, 50%)",
+      pointer1stColor: "hsl(155, 100%, 50%)",
+      pointer2ndColor: "hsl(145, 100%, 50%)",
     };
   },
   methods: {
@@ -209,54 +214,54 @@ li {
 }
 
 .pinky {
-  background-color: hsl(211, 100%, 50%);
+  background-color: v-bind(pinkyColor);
   border-style: groove;
-  border-color: hsl(211, 100%, 50%);
+  border-color: v-bind(pinkyColor);
   box-shadow: 2px 2px 2px slategray;
 }
 
 .pinky.selected {
-  color: hsl(211, 100%, 50%);
+  color: v-bind(pinkyColor);
 }
 
 .ring {
-  background-color: hsl(190, 100%, 50%);
+  background-color: v-bind(ringColor);
   border-style: groove;
-  border-color: hsl(190, 100%, 50%);
+  border-color: v-bind(ringColor);
   box-shadow: 2px 2px 2px slategray;
 }
 .ring.selected {
-  color: hsl(190, 100%, 50%);
+  color: v-bind(ringColor);
 }
 
 .middle {
-  background-color: hsl(171, 100%, 50%);
+  background-color: v-bind(middleColor);
   border-style: groove;
-  border-color: hsl(171, 100%, 50%);
+  border-color: v-bind(middleColor);
   box-shadow: 2px 2px 2px slategray;
 }
 .middle.selected {
-  color: hsl(171, 100%, 50%);
+  color: v-bind(middleColor);
 }
 
 .pointer1st {
-  background-color: hsl(145, 100%, 50%);
+  background-color: v-bind(pointer1stColor);
   border-style: groove;
-  border-color: hsl(145, 100%, 50%);
+  border-color: v-bind(pointer1stColor);
   box-shadow: 2px 2px 2px slategray;
 }
 .pointer1st.selected {
-  color: hsl(145, 100%, 50%);
+  color: v-bind(pointer1stColor);
 }
 
 .pointer2nd {
-  background-color: hsl(100, 100%, 70%);
+  background-color: v-bind(pointer2ndColor);
   border-style: groove;
-  border-color: hsl(100, 100%, 70%);
+  border-color: v-bind(pointer2ndColor);
   box-shadow: 2px 2px 2px slategray;
 }
 .pointer2nd.selected {
-  color: hsl(100, 100%, 70%);
+  color: v-bind(pointer2ndColor);
 }
 
 .selected {
