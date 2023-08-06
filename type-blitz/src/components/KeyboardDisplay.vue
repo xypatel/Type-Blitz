@@ -10,6 +10,31 @@ export default {
     };
   },
   methods: {
+    setColors(colorScheme) {
+      const aqua = {
+        pinkyColor: "hsl(210, 100%, 50%)",
+        ringColor: "hsl(190, 100%, 50%)",
+        middleColor: "hsl(171, 100%, 50%)",
+        pointer1stColor: "hsl(155, 100%, 50%)",
+        pointer2ndColor: "hsl(145, 100%, 50%)",
+      }
+
+      const fire = {
+        pinkyColor: "hsl(5, 100%, 50%)",
+        ringColor: "hsl(20, 100%, 50%)",
+        middleColor: "hsl(30, 100%, 50%)",
+        pointer1stColor: "hsl(35, 100%, 50%)",
+        pointer2ndColor: "hsl(40, 100%, 50%)",
+      }
+
+      colorScheme = colorScheme == "aqua" ? aqua : fire;
+
+      this.pinkyColor = colorScheme.pinkyColor;
+      this.ringColor = colorScheme.ringColor;
+      this.middleColor = colorScheme.middleColor;
+      this.pointer1stColor = colorScheme.pointer1stColor;
+      this.pointer2ndColor = colorScheme.pointer2ndColor;
+    },
     onKeyup(event) {
       this.bumpKey(event);
     },
@@ -154,9 +179,45 @@ export default {
       <li class="pinky Shift" id="Shift">SHIFT</li>
     </ul>
   </div>
+<div class="dropdown">
+  <button class="dropbtn">Colors</button>
+    <div class="dropdown-content">
+      <a href="#" @click="setColors('aqua')" style="color: deepskyblue">Aqua</a>
+      <a href="#" @click="setColors('fire')" style="color: orangered">Fire</a>
+    </div>
+  </div>
 </template>
 
 <style scoped>
+
+.dropdown {
+  position: absolute;
+  top: 1%;
+  left: 48%;
+  font-family: "Lucida Console";
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  text-align: center;
+  padding-left: 5em;
+  border-radius: 1em;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropbtn {
+  background-color: transparent;
+  width: 10em;
+  color: darkgray;
+  border-radius: 1em;
+  font-size: 1.25em;
+  cursor: pointer;
+}
 
 body {
   background-color: black;
