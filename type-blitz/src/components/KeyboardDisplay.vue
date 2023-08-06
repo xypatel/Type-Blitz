@@ -167,7 +167,6 @@ body {
 .keyboard {
   display: flex;
   flex-direction: column;
-  margin: auto 10em auto auto;
 }
 
 .row {
@@ -176,44 +175,44 @@ body {
 }
 
 li {
-  height: 3em;
-  width: 3em;
+  height: 4em;
+  width: 4em;
   color: rgba(0,0,0,1);
-  border-radius: 0.4em;
-  line-height: 3em;
+  border-radius: 1em;
+  line-height: 4em;
   letter-spacing: 1px;
-  margin: 0.4em;
+  margin: 0.5em;
   transition: 0.3s;
   text-align: center;
   font-size: 1em;
-  text-shadow: 2px 2px 5px goldenrod;
+  text-shadow: 2px 2px 5px black;
 }
 
 #Tab {
-  width: 5em;
+  width: 6em;
 }
 
 #CapsLock {
-  width: 6em;
+  width: 7em;
 }
 
 #Shift {
-  width: 8em;
+  width: 10em;
 }
 
 #Enter {
-  width: 6em;
+  width: 8em;
 }
 
 #Backspace {
-  width: 5em;
+  width: 6em;
 }
 
 .pinky {
   background-color: hsl(211, 100%, 50%);
   border-style: groove;
   border-color: hsl(211, 100%, 50%);
-  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
+  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
 }
 
 .pinky.selected {
@@ -224,7 +223,7 @@ li {
   background-color: hsl(190, 100%, 50%);
   border-style: groove;
   border-color: hsl(190, 100%, 50%);
-  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
+  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
 }
 .ring.selected {
   color: hsl(190, 100%, 50%);
@@ -234,7 +233,7 @@ li {
   background-color: hsl(171, 100%, 50%);
   border-style: groove;
   border-color: hsl(171, 100%, 50%);
-  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
+  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
 }
 .middle.selected {
   color: hsl(171, 100%, 50%);
@@ -244,7 +243,7 @@ li {
   background-color: hsl(145, 100%, 50%);
   border-style: groove;
   border-color: hsl(145, 100%, 50%);
-  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
+  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
 }
 .pointer1st.selected {
   color: hsl(145, 100%, 50%);
@@ -254,7 +253,7 @@ li {
   background-color: hsl(100, 100%, 70%);
   border-style: groove;
   border-color: hsl(100, 100%, 70%);
-  box-shadow: 2px 2px 5px rgba(255,255,0,.7);
+  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
 }
 .pointer2nd.selected {
   color: hsl(100, 100%, 70%);
