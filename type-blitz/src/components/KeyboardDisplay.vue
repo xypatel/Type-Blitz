@@ -22,7 +22,8 @@ export default {
     },
     getPressedKeyName(event){
       let keyPressed;
-      if (event.keyCode >= 48 && event.keyCode <= 90) {
+      let isNumberOrLetter = event.keyCode >= 48 && event.keyCode <= 90;
+      if (isNumberOrLetter) {
         keyPressed = String.fromCharCode(event.keyCode);
       } else {
         keyPressed = event.key;
