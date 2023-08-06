@@ -54,9 +54,9 @@ export default {
       const desert = {
         pinkyColor: "hsl(30, 90%, 60%)",
         ringColor: "hsl(35, 80%, 60%)",
-        middleColor: "hsl(30, 90%, 70%)",
-        pointer1stColor: "hsl(30, 90%, 70%)",
-        pointer2ndColor: "hsl(30, 100%, 80%)",
+        middleColor: "hsl(40, 90%, 60%)",
+        pointer1stColor: "hsl(45, 100%, 70%)",
+        pointer2ndColor: "hsl(45, 90%, 75%)",
       }
 
       switch (colorScheme) {
@@ -222,12 +222,12 @@ export default {
 <div class="dropdown">
   <button class="dropbtn">Colors</button>
     <div class="dropdown-content">
-      <a href="#" @click="setColors('classic')" style="color: mediumspringgreen">Classic</a>
-      <a href="#" @click="setColors('steel')" style="color: grey">Steel</a>
-      <a href="#" @click="setColors('aqua')" style="color: deepskyblue">Aqua</a>
-      <a href="#" @click="setColors('fire')" style="color: orangered">Fire</a>
-      <a href="#" @click="setColors('bubblegum')" style="color: hotpink">BubbleGum</a>
-      <a href="#" @click="setColors('desert')" style="color: sandybrown">Desert</a>
+      <a href="#" @click="setColors('classic')" style="color: mediumspringgreen">Classic 🏝️</a>
+      <a href="#" @click="setColors('steel')" style="color: grey">Steel 🪙</a>
+      <a href="#" @click="setColors('aqua')" style="color: deepskyblue">Aqua 💧</a>
+      <a href="#" @click="setColors('fire')" style="color: orangered">Fire 🔥</a>
+      <a href="#" @click="setColors('bubblegum')" style="color: hotpink">BubbleGum 🍬</a>
+      <a href="#" @click="setColors('desert')" style="color: sandybrown">Desert 🏜️</a>
     </div>
   </div>
 </template>
@@ -237,7 +237,7 @@ export default {
 .dropdown {
   position: relative;
   left: 40%;
-  font-family: "Lucida Console";
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .dropdown-content {
