@@ -29,17 +29,14 @@ export default {
       }
     },
     handleInputStringTooLong(){
-      if(this.inputString.length >= 4 && event.key != "Backspace" && event.key != "Enter"){
+      if(this.inputString.length >= this.keysToType.length && event.key != "Backspace" && event.key != "Enter"){
         this.inputString = "";
         this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
       }
     },
     handleBackspaceKey(){
-      const charToRemove = this.inputString.charAt(this.inputString.length - 1);
-      if(this.keysToType.charAt(this.inputString.length - 1) == charToRemove){
-        const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-        this.glowInputKeyYellow(lastKeyToTypeElement);
-      }
+      const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+      this.glowInputKeyYellow(lastKeyToTypeElement);
       this.inputString = this.inputString.slice(0, -1);
     },
     handleEnterKey(){
