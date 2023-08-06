@@ -2,9 +2,79 @@
 export default {
   data() {
     return {
+      pinkyColor: "hsl(210, 100%, 50%)",
+      ringColor: "hsl(190, 100%, 50%)",
+      middleColor: "hsl(171, 100%, 50%)",
+      pointer1stColor: "hsl(155, 100%, 50%)",
+      pointer2ndColor: "hsl(145, 100%, 50%)",
     };
   },
   methods: {
+    setColors(colorScheme) {
+      const classic = {
+        pinkyColor: "hsl(210, 100%, 50%)",
+        ringColor: "hsl(190, 100%, 50%)",
+        middleColor: "hsl(171, 100%, 50%)",
+        pointer1stColor: "hsl(155, 100%, 50%)",
+        pointer2ndColor: "hsl(145, 100%, 50%)",
+      }
+
+      const aqua = {
+        pinkyColor: "hsl(220, 100%, 50%)",
+        ringColor: "hsl(220, 100%, 60%)",
+        middleColor: "hsl(200, 100%, 50%)",
+        pointer1stColor: "hsl(180, 100%, 60%)",
+        pointer2ndColor: "hsl(160, 100%, 60%)",
+      }
+
+      const fire = {
+        pinkyColor: "hsl(5, 100%, 50%)",
+        ringColor: "hsl(20, 100%, 50%)",
+        middleColor: "hsl(30, 100%, 50%)",
+        pointer1stColor: "hsl(35, 100%, 50%)",
+        pointer2ndColor: "hsl(40, 100%, 50%)",
+      }
+
+      const steel = {
+        pinkyColor: "hsl(0, 0%, 30%)",
+        ringColor: "hsl(0, 0%, 40%)",
+        middleColor: "hsl(0, 0%, 50%)",
+        pointer1stColor: "hsl(0, 0%, 60%)",
+        pointer2ndColor: "hsl(0, 0%, 80%)",
+      }
+
+      const bubblegum = {
+        pinkyColor: "hsl(330, 100%, 60%)",
+        ringColor: "hsl(330, 100%, 70%)",
+        middleColor: "hsl(330, 100%, 80%)",
+        pointer1stColor: "hsl(330, 100%, 85%)",
+        pointer2ndColor: "hsl(330, 100%, 90%)",
+      }
+
+      const desert = {
+        pinkyColor: "hsl(35, 80%, 60%)",
+        ringColor: "hsl(30, 90%, 60%)",
+        middleColor: "hsl(20, 90%, 70%)",
+        pointer1stColor: "hsl(30, 90%, 70%)",
+        pointer2ndColor: "hsl(30, 100%, 80%)",
+      }
+
+      switch (colorScheme) {
+        case "classic": colorScheme = classic; break;
+        case "aqua": colorScheme = aqua; break;
+        case "fire": colorScheme = fire; break;
+        case "steel": colorScheme = steel; break;
+        case "bubblegum": colorScheme = bubblegum; break;
+        case "desert": colorScheme = desert; break;
+        default: colorScheme = aqua; break;
+      }
+
+      this.pinkyColor = colorScheme.pinkyColor;
+      this.ringColor = colorScheme.ringColor;
+      this.middleColor = colorScheme.middleColor;
+      this.pointer1stColor = colorScheme.pointer1stColor;
+      this.pointer2ndColor = colorScheme.pointer2ndColor;
+    },
     onKeyup(event) {
       this.bumpKey(event);
     },
@@ -149,9 +219,50 @@ export default {
       <li class="pinky Shift" id="Shift">SHIFT</li>
     </ul>
   </div>
+<div class="dropdown">
+  <button class="dropbtn">Colors</button>
+    <div class="dropdown-content">
+      <a href="#" @click="setColors('classic')" style="color: mediumspringgreen">Classic</a>
+      <a href="#" @click="setColors('steel')" style="color: grey">Steel</a>
+      <a href="#" @click="setColors('aqua')" style="color: deepskyblue">Aqua</a>
+      <a href="#" @click="setColors('fire')" style="color: orangered">Fire</a>
+      <a href="#" @click="setColors('bubblegum')" style="color: hotpink">BubbleGum</a>
+      <a href="#" @click="setColors('desert')" style="color: sandybrown">Desert</a>
+    </div>
+  </div>
 </template>
 
 <style scoped>
+
+.dropdown {
+  position: absolute;
+  top: 58%;
+  left: 48.5%;
+  font-family: "Lucida Console";
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  text-align: center;
+  padding-left: 1.8em;
+  border-radius: 1em;
+  font-size: 1.5em;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropbtn {
+  background-color: transparent;
+  width: 10em;
+  color: darkgray;
+  border-radius: 1em;
+  font-size: 1.25em;
+  cursor: pointer;
+}
 
 body {
   background-color: black;
@@ -209,54 +320,54 @@ li {
 }
 
 .pinky {
-  background-color: hsl(211, 100%, 50%);
+  background-color: v-bind(pinkyColor);
   border-style: groove;
-  border-color: hsl(211, 100%, 50%);
+  border-color: v-bind(pinkyColor);
   box-shadow: 2px 2px 2px slategray;
 }
 
 .pinky.selected {
-  color: hsl(211, 100%, 50%);
+  color: v-bind(pinkyColor);
 }
 
 .ring {
-  background-color: hsl(190, 100%, 50%);
+  background-color: v-bind(ringColor);
   border-style: groove;
-  border-color: hsl(190, 100%, 50%);
+  border-color: v-bind(ringColor);
   box-shadow: 2px 2px 2px slategray;
 }
 .ring.selected {
-  color: hsl(190, 100%, 50%);
+  color: v-bind(ringColor);
 }
 
 .middle {
-  background-color: hsl(171, 100%, 50%);
+  background-color: v-bind(middleColor);
   border-style: groove;
-  border-color: hsl(171, 100%, 50%);
+  border-color: v-bind(middleColor);
   box-shadow: 2px 2px 2px slategray;
 }
 .middle.selected {
-  color: hsl(171, 100%, 50%);
+  color: v-bind(middleColor);
 }
 
 .pointer1st {
-  background-color: hsl(145, 100%, 50%);
+  background-color: v-bind(pointer1stColor);
   border-style: groove;
-  border-color: hsl(145, 100%, 50%);
+  border-color: v-bind(pointer1stColor);
   box-shadow: 2px 2px 2px slategray;
 }
 .pointer1st.selected {
-  color: hsl(145, 100%, 50%);
+  color: v-bind(pointer1stColor);
 }
 
 .pointer2nd {
-  background-color: hsl(100, 100%, 70%);
+  background-color: v-bind(pointer2ndColor);
   border-style: groove;
-  border-color: hsl(100, 100%, 70%);
+  border-color: v-bind(pointer2ndColor);
   box-shadow: 2px 2px 2px slategray;
 }
 .pointer2nd.selected {
-  color: hsl(100, 100%, 70%);
+  color: v-bind(pointer2ndColor);
 }
 
 .selected {
