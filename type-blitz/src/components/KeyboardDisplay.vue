@@ -52,9 +52,9 @@ export default {
       }
 
       const desert = {
-        pinkyColor: "hsl(35, 80%, 60%)",
-        ringColor: "hsl(30, 90%, 60%)",
-        middleColor: "hsl(20, 90%, 70%)",
+        pinkyColor: "hsl(30, 90%, 60%)",
+        ringColor: "hsl(35, 80%, 60%)",
+        middleColor: "hsl(30, 90%, 70%)",
         pointer1stColor: "hsl(30, 90%, 70%)",
         pointer2ndColor: "hsl(30, 100%, 80%)",
       }
