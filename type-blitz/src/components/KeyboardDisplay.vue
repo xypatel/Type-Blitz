@@ -212,7 +212,7 @@ li {
   background-color: hsl(211, 100%, 50%);
   border-style: groove;
   border-color: hsl(211, 100%, 50%);
-  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
+  box-shadow: 2px 2px 2px slategray;
 }
 
 .pinky.selected {
@@ -223,7 +223,7 @@ li {
   background-color: hsl(190, 100%, 50%);
   border-style: groove;
   border-color: hsl(190, 100%, 50%);
-  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
+  box-shadow: 2px 2px 2px slategray;
 }
 .ring.selected {
   color: hsl(190, 100%, 50%);
@@ -233,7 +233,7 @@ li {
   background-color: hsl(171, 100%, 50%);
   border-style: groove;
   border-color: hsl(171, 100%, 50%);
-  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
+  box-shadow: 2px 2px 2px slategray;
 }
 .middle.selected {
   color: hsl(171, 100%, 50%);
@@ -243,7 +243,7 @@ li {
   background-color: hsl(145, 100%, 50%);
   border-style: groove;
   border-color: hsl(145, 100%, 50%);
-  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
+  box-shadow: 2px 2px 2px slategray;
 }
 .pointer1st.selected {
   color: hsl(145, 100%, 50%);
@@ -253,7 +253,7 @@ li {
   background-color: hsl(100, 100%, 70%);
   border-style: groove;
   border-color: hsl(100, 100%, 70%);
-  box-shadow: 2px 2px 5px rgba(255,255,255,.7);
+  box-shadow: 2px 2px 2px slategray;
 }
 .pointer2nd.selected {
   color: hsl(100, 100%, 70%);
