@@ -188,10 +188,10 @@ export default {
   font-family: Lucida Console, Courier, monospace;
   color: white;
   text-shadow: 2px 2px 10px turquoise;
-  position: relative;
+  position: absolute;
   text-align: center;
-  bottom: 20%;
-  left: 85%;
+  bottom: 60%;
+  left: 6em;
 }
 
 
