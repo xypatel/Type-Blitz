@@ -12,35 +12,12 @@ export default {
       let keyPressed = this.getPressedKeyName(event);
 
       if(keyPressed == "Shift"){
-        const keyElement = document.getElementsByClassName("Shift");
-        keyElement[0].classList.add("hit")
-        keyElement[0].classList.add("selected");
-        keyElement[1].classList.add("hit")
-        keyElement[1].classList.add("selected");
-        keyElement[0].addEventListener('animationend', () => {
-          keyElement[0].classList.remove("hit")
-        })
-        keyElement[1].addEventListener('animationend', () => {
-          keyElement[1].classList.remove("hit")
-        })
-        setTimeout(() => {
-          keyElement[0].classList.remove("selected")
-          keyElement[1].classList.remove("selected")
-        }, 1000)
+        this.animateBothShiftKeys();
       } else {
-        const keyElement = document.getElementById(keyPressed);
-
-        keyElement.classList.add("hit")
-        keyElement.classList.add("selected")
-        keyElement.addEventListener('animationend', () => {
-          keyElement.classList.remove("hit")
-        })
+        this.animateKeyPressed(keyPressed);
       }
       if(event.key == "Enter") {
-        let selectedElements = document.getElementsByClassName("selected")
-        while(selectedElements.length > 0){
-          selectedElements[0].classList.remove("selected")
-        }
+        this.removeEnterKeyAnimation();
       }
     },
     getPressedKeyName(event){
@@ -63,6 +40,38 @@ export default {
         }
       }
       return keyPressed;
+    },
+    animateBothShiftKeys(){
+      const keyElement = document.getElementsByClassName("Shift");
+      keyElement[0].classList.add("hit")
+      keyElement[0].classList.add("selected");
+      keyElement[1].classList.add("hit")
+      keyElement[1].classList.add("selected");
+      keyElement[0].addEventListener('animationend', () => {
+        keyElement[0].classList.remove("hit")
+      })
+      keyElement[1].addEventListener('animationend', () => {
+        keyElement[1].classList.remove("hit")
+      })
+      setTimeout(() => {
+        keyElement[0].classList.remove("selected")
+        keyElement[1].classList.remove("selected")
+      }, 1000)
+    },
+    animateKeyPressed(keyPressed){
+      const keyElement = document.getElementById(keyPressed);
+
+      keyElement.classList.add("hit")
+      keyElement.classList.add("selected")
+      keyElement.addEventListener('animationend', () => {
+        keyElement.classList.remove("hit")
+      })
+    },
+    removeEnterKeyAnimation(){
+      let selectedElements = document.getElementsByClassName("selected")
+      while(selectedElements.length > 0){
+        selectedElements[0].classList.remove("selected")
+      }
     }
   },
   mounted() {
