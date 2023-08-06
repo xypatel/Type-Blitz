@@ -178,7 +178,7 @@ li {
   height: 4em;
   width: 4em;
   color: rgba(0,0,0,1);
-  border-radius: 1em;
+  border-radius: .75em;
   line-height: 4em;
   letter-spacing: 1px;
   margin: 0.5em;
