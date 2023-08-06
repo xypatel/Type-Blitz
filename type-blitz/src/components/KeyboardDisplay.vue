@@ -185,7 +185,7 @@ li {
   transition: 0.3s;
   text-align: center;
   font-size: 1em;
-  text-shadow: 2px 2px 5px black;
+  text-shadow: 1px 1px 2px black;
 }
 
 #Tab {
