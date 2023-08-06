@@ -192,7 +192,7 @@ export default {
 
 .dropdown {
   position: absolute;
-  top: 1%;
+  top: 58%;
   left: 48%;
   font-family: "Lucida Console";
 }
