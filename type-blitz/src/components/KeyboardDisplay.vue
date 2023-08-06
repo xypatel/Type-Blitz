@@ -17,7 +17,7 @@ export default {
         this.animateKeyPressed(keyPressed);
       }
       if(event.key == "Enter") {
-        this.removeEnterKeyAnimation();
+        this.removeSelectedAnimations();
       }
     },
     getPressedKeyName(event){
@@ -68,7 +68,7 @@ export default {
         keyElement.classList.remove("hit")
       })
     },
-    removeEnterKeyAnimation(){
+    removeSelectedAnimations(){
       let selectedElements = document.getElementsByClassName("selected")
       while(selectedElements.length > 0){
         selectedElements[0].classList.remove("selected")
