@@ -98,10 +98,10 @@ export default {
       } else {
         keyPressed = event.key;
         switch (keyPressed) {
-          case '\-' : keyPressed = "Minus"; break;
-          case '\=' : keyPressed = "Equal"; break;
+          case '-' : keyPressed = "Minus"; break;
+          case '=' : keyPressed = "Equal"; break;
           case '\\' : keyPressed = "Backslash"; break;
-          case '\]' : keyPressed = "CloseBracket"; break;
+          case ']' : keyPressed = "CloseBracket"; break;
           case '\[' : keyPressed = "OpenBracket"; break;
           case '\;' : keyPressed = "SemiColon"; break;
           case '\'' : keyPressed = "Quote"; break;
@@ -235,16 +235,18 @@ export default {
 <style scoped>
 
 .dropdown {
-  position: relative;
-  left: 40%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
+  bottom: 1.25em;
   text-align: center;
-  padding-left: 1.8em;
+  padding-left: 1em;
   border-radius: 1em;
   font-size: 1.5em;
 }
