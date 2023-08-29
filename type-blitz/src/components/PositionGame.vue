@@ -84,10 +84,6 @@ export default {
         console.log("Incorrect!");
       }
     },
-    changeKeysToTypeRandomly(){
-      const randomIndex = Math.floor(Math.random() * combos.length);
-      this.keysToType = combos[randomIndex];
-    },
     changeKeysToTypeByLevel(){
       const combos = this.createKeyCombos();
       this.keysToType = combos[this.level];
@@ -138,7 +134,7 @@ export default {
   mounted() {
     document.addEventListener("keyup", this.onKeyup);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener("keyup", this.onKeyup);
   },
 };
