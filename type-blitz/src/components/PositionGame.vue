@@ -10,7 +10,9 @@ export default {
       level: -1,
       startTime: null,
       elapsedTime: 0,
-      totalTimes:[],
+      elapsedCorrectTimes: [],
+      correctWordTimes: [],
+      finishedGameTimes:[],
       gameFinished: false
     };
   },
@@ -78,6 +80,14 @@ export default {
         }
         console.log("Correct!");
         this.level++;
+
+        if(this.elapsedCorrectTimes.length > 0){
+          this.elapsedCorrectTimes.push(this.elapsedTime);
+          this.correctWordTimes.push(parseFloat(this.elapsedCorrectTimes[this.elapsedCorrectTimes.length - 1] - this.elapsedCorrectTimes[this.elapsedCorrectTimes.length - 2]).toFixed(3));
+        } else {
+          this.elapsedCorrectTimes.push(this.elapsedTime);
+        }
+
         this.changeKeysToTypeByLevel();
       } else {
         this.resultMatched = false;
@@ -122,7 +132,9 @@ export default {
     },
     resetGame(){
       this.gameFinished = true;
-      this.totalTimes.push(this.elapsedTime);
+      this.finishedGameTimes.push(this.elapsedTime);
+      this.elapsedCorrectTimes = [];
+      this.correctWordTimes = [];
       setTimeout(() => {
         this.gameFinished = false;
         this.level = -1;
@@ -145,9 +157,9 @@ export default {
     <p>Time: {{ elapsedTime }} seconds</p>
   </div>
 
-  <div class="totalTimes" v-if="this.totalTimes.length != 0">
+  <div class="finishedGameTimes" v-if="this.finishedGameTimes.length != 0">
     <h2>Score</h2>
-    <p v-for="(totalTime, index) in totalTimes">{{ index + 1 }}) {{ totalTime }} Seconds</p>
+    <p v-for="(totalTime, index) in finishedGameTimes">{{ index + 1 }}) {{ totalTime }} Seconds</p>
   </div>
 
   <div id="inputKeyDisplay">
@@ -163,7 +175,11 @@ export default {
     <div class="toType" v-if="!gameFinished">
       <p v-for="(char, index) in keysToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
-    <p id="gameDone" v-if="gameFinished">Finished in {{totalTimes[totalTimes.length - 1]}} Seconds</p>
+    <p id="gameDone" v-if="gameFinished">Finished in {{finishedGameTimes[finishedGameTimes.length - 1]}} Seconds</p>
+  </div>
+
+  <div id="wordTime">
+    <p> {{ correctWordTimes[correctWordTimes.length - 1] }}</p>
   </div>
 
   <div id="inputString">
@@ -267,13 +283,24 @@ export default {
   height: fit-content;
 }
 
-.totalTimes {
+.finishedGameTimes {
   width: fit-content;
   font-size: 1em;
   color: white;
   position: absolute;
   top: 4em;
   left: 2em;
+  height: fit-content;
+}
+
+#wordTime {
+  width: fit-content;
+  font-size: 1em;
+  color : rgba(255, 255, 255, 0.3);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: absolute;
+  top: 1.5%;
+  left: 5%;
   height: fit-content;
 }
 </style>
