@@ -13,6 +13,8 @@ export default {
       elapsedCorrectTimes: [],
       correctWordTimes: [],
       finishedGameTimes:[],
+      correctCount: 0,
+      incorrectCount: 0,
       gameFinished: false
     };
   },
@@ -75,6 +77,8 @@ export default {
     checkInput(){
       if(this.keysEntered === this.keysToType){
         this.resultMatched = true;
+        this.correctCount++;
+
         if(this.level == -1){
           this.startTime = new Date().getTime();
         }
@@ -91,6 +95,7 @@ export default {
         this.changeKeysToTypeByLevel();
       } else {
         this.resultMatched = false;
+        this.incorrectCount++;
         console.log("Incorrect!");
       }
     },
@@ -175,7 +180,10 @@ export default {
     <div class="toType" v-if="!gameFinished">
       <p v-for="(char, index) in keysToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
-    <p id="gameDone" v-if="gameFinished">Finished in {{finishedGameTimes[finishedGameTimes.length - 1]}} Seconds</p>
+    <p id="gameDone" v-if="gameFinished">
+      Finished in {{ finishedGameTimes[finishedGameTimes.length - 1] }} Seconds.
+      Correct : {{ correctCount }} Incorrect: {{ incorrectCount }}
+    </p>
   </div>
 
   <div id="wordTime">
@@ -196,14 +204,15 @@ export default {
 }
 
 #gameDone {
-  font-size: 2em;
+  font-size: 1em;
   font-family: Lucida Console, Courier, monospace;
   color: white;
   text-shadow: 2px 2px 10px turquoise;
   position: absolute;
   text-align: center;
   bottom: 60%;
-  left: 6em;
+  left: 8em;
+  width: 20em;
 }
 
 
@@ -299,8 +308,8 @@ export default {
   color : rgba(255, 255, 255, 0.3);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: absolute;
-  top: 1.5%;
-  left: 5%;
+  top: 2em;
+  left: 12em;
   height: fit-content;
 }
 </style>
