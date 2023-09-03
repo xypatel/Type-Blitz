@@ -15,6 +15,8 @@ export default {
       finishedGameTimes:[],
       correctCount: 0,
       incorrectCount: 0,
+      wordCorrectPercentages: [],
+      scores: [],
       gameFinished: false
     };
   },
@@ -138,6 +140,8 @@ export default {
     resetGame(){
       this.gameFinished = true;
       this.finishedGameTimes.push(this.elapsedTime);
+      this.wordCorrectPercentages.push(parseFloat((this.correctCount / (this.correctCount + this.incorrectCount)) * 100).toFixed(2));
+      this.scores.push(this.elapsedTime + " seconds" + " : " + this.wordCorrectPercentages[this.wordCorrectPercentages.length - 1] + "% correct");
       this.elapsedCorrectTimes = [];
       this.correctWordTimes = [];
       setTimeout(() => {
@@ -145,6 +149,8 @@ export default {
         this.level = -1;
         this.keysToType = "fj";
         this.elapsedTime = 0;
+        this.correctCount = 0;
+        this.incorrectCount = 0;
       }, 5000);
     }
   },
@@ -164,7 +170,7 @@ export default {
 
   <div class="finishedGameTimes" v-if="this.finishedGameTimes.length != 0">
     <h2>Score</h2>
-    <p v-for="(totalTime, index) in finishedGameTimes">{{ index + 1 }}) {{ totalTime }} Seconds</p>
+    <p v-for="(score, index) in scores" :key="index"> {{ index + 1 }}) {{ score }}</p>
   </div>
 
   <div id="inputKeyDisplay">
@@ -309,7 +315,7 @@ export default {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: absolute;
   top: 2em;
-  left: 12em;
+  left: 13em;
   height: fit-content;
 }
 </style>
