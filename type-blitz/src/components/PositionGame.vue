@@ -1,5 +1,5 @@
 <script>
-import * as styleFunctions from "./common_funnctions/styleFunctions.js";
+import * as styleFunctions from "./common_functions/styleFunctions.js";
 export default {
   data() {
     return {
