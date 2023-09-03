@@ -1,4 +1,5 @@
 <script>
+import * as styleFunctions from "./common_functions/styleFunctions.js";
 export default {
   data() {
     return {
@@ -37,12 +38,12 @@ export default {
     handleInputStringTooLong(){
       if(this.inputString.length >= this.keysToType.length && event.key != "Backspace" && event.key != "Enter"){
         this.inputString = "";
-        this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
+        styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
       }
     },
     handleBackspaceKey(){
       const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-      this.glowInputKeyYellow(lastKeyToTypeElement);
+      styleFunctions.glowInputKeyYellow(lastKeyToTypeElement);
       this.inputString = this.inputString.slice(0, -1);
     },
     handleEnterKey(){
@@ -50,31 +51,17 @@ export default {
       this.updateElapsedTime();
       this.checkInput();
       this.inputString = "";
-      this.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
+      styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
     },
     handleValidInputKey(){
       this.inputString += event.key;
       if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
         const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-        this.glowInputKeyGreen(lastKeyToTypeElement);
+        styleFunctions.glowInputKeyGreen(lastKeyToTypeElement);
       } else {
         const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-        this.glowInputKeyRed(lastKeyToTypeElement);
+        styleFunctions.glowInputKeyRed(lastKeyToTypeElement);
       }
-    },
-    glowKeysToTypeYellow(lettersToGlow) {
-      for(let i = 0; i < lettersToGlow.length; i++){
-        lettersToGlow[i].style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
-      }
-    },
-    glowInputKeyYellow(letterToGlow) {
-      letterToGlow.style.textShadow = "1px 1px 2px black, 0 0 25px yellow, 0 0 5px goldenrod";
-    },
-    glowInputKeyGreen(letterToGlow) {
-      letterToGlow.style.textShadow = "1px 1px 2px black, 0 0 25px green, 0 0 10px limegreen";
-    },
-    glowInputKeyRed(letterToGlow) {
-      letterToGlow.style.textShadow = "1px 1px 2px black, 0 0 25px red, 0 0 10px crimson";
     },
     checkInput(){
       if(this.keysEntered === this.keysToType){
