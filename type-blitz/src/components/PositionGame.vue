@@ -188,7 +188,7 @@ export default {
     </div>
     <p id="gameDone" v-if="gameFinished">
       Finished in {{ finishedGameTimes[finishedGameTimes.length - 1] }} Seconds.
-      Correct : {{ correctCount }} Incorrect: {{ incorrectCount }}
+      Correct:{{ correctCount }} Incorrect:{{ incorrectCount }}
     </p>
   </div>
 
