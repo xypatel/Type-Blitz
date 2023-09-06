@@ -90,7 +90,7 @@ export default {
       }
     },
     changeKeysToTypeByLevel(){
-      const combos = gameFunctions.createKeyCombos();
+      const combos = gameFunctions.generateKeysToType();
       this.keysToType = combos[this.level];
       if(this.level == combos.length){
         this.resetGame();

@@ -1,4 +1,4 @@
-function createKeyCombos(){
+function generateKeysToType(){
     const doublesHome = ["ff", "jj", "dd", "kk", "ss", "ll", "aa", ";;", "gg", "hh"];
     const foursHome = ["asdf", "jkl;", "sdfg", "hjkl"];
     const doublesTop = ["uu", "rr", "ii", "ee", "oo", "ww", "pp", "qq", "yy", "tt"];
@@ -22,4 +22,4 @@ function createKeyCombos(){
     return [...combos, ...combosReversed];
 }
 
-export { createKeyCombos };
+export { generateKeysToType };
