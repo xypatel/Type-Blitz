@@ -175,14 +175,14 @@ export default {
 }
 
 #gameDone {
-  font-size: 1em;
+  font-size: 2em;
   font-family: Lucida Console, Courier, monospace;
   color: white;
   text-shadow: 2px 2px 10px turquoise;
   position: absolute;
   text-align: center;
   bottom: 60%;
-  left: 8em;
+  left: 0;
   width: 20em;
 }
 
