@@ -32,7 +32,7 @@ export default {
         this.handleBackspaceKey();
       } else if(event.key == "Enter"){
         this.handleEnterKey();
-      } else if(event.key != "Shift" && event.key != "Tab"){
+      } else {
         this.handleValidInputKey();
       }
     },
