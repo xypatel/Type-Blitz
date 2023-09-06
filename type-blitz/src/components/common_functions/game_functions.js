@@ -22,4 +22,14 @@ function generateKeysToType(){
     return [...combos, ...combosReversed];
 }
 
-export { generateKeysToType };
+function isValidInputKey(key){
+    if(key == "Enter" || key == "Backspace" || key == "Tab" || key == "Shift" || key == "CapsLock" || key == "Control" || key == "Alt" || key == "Meta" || key == "Escape"
+        || key == "ArrowLeft" || key == "ArrowRight" || key == "ArrowUp" || key == "ArrowDown" || key == "Delete" || key == "Home" || key == "End" || key == "PageUp" || key == "PageDown" || key == "Insert"
+        || key == "F1" || key == "F2" || key == "F3" || key == "F4" || key == "F5" || key == "F6" || key == "F7" || key == "F8" || key == "F9" || key == "F10"
+        || key == "F11" || key == "F12" || key == "F13" || key == "F14" || key == "F15" || key == "F16" || key == "F17" || key == "F18" || key == "F19" || key == "F20"){
+        return false;
+    }
+    return true;
+}
+
+export { generateKeysToType, isValidInputKey };

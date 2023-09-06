@@ -37,7 +37,7 @@ export default {
       }
     },
     handleInputStringTooLong(){
-      if(this.inputString.length >= this.keysToType.length && event.key != "Backspace" && event.key != "Enter"){
+      if(this.inputString.length >= this.keysToType.length && gameFunctions.isValidInputKey(event.key)){
         this.inputString = "";
         styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
       }
@@ -55,13 +55,15 @@ export default {
       styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
     },
     handleValidInputKey(){
-      this.inputString += event.key;
-      if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
-        const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-        styleFunctions.glowInputKeyGreen(lastKeyToTypeElement);
-      } else {
-        const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-        styleFunctions.glowInputKeyRed(lastKeyToTypeElement);
+      if(gameFunctions.isValidInputKey(event.key)){
+        this.inputString += event.key;
+        if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
+          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+          styleFunctions.glowInputKeyGreen(lastKeyToTypeElement);
+        } else {
+          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+          styleFunctions.glowInputKeyRed(lastKeyToTypeElement);
+        }
       }
     },
     checkInput(){
