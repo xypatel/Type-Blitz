@@ -148,7 +148,7 @@ export default {
   mounted() {
     document.addEventListener("keyup", this.onKeyup);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener("keyup", this.onKeyup);
   },
 };

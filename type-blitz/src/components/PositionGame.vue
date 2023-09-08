@@ -32,12 +32,12 @@ export default {
         this.handleBackspaceKey();
       } else if(event.key == "Enter"){
         this.handleEnterKey();
-      } else if(event.key != "Shift" && event.key != "Tab"){
+      } else {
         this.handleValidInputKey();
       }
     },
     handleInputStringTooLong(){
-      if(this.inputString.length >= this.keysToType.length && event.key != "Backspace" && event.key != "Enter"){
+      if(this.inputString.length >= this.keysToType.length && gameFunctions.isValidInputKey(event.key)){
         this.inputString = "";
         styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
       }
@@ -55,13 +55,15 @@ export default {
       styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
     },
     handleValidInputKey(){
-      this.inputString += event.key;
-      if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
-        const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-        styleFunctions.glowInputKeyGreen(lastKeyToTypeElement);
-      } else {
-        const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
-        styleFunctions.glowInputKeyRed(lastKeyToTypeElement);
+      if(gameFunctions.isValidInputKey(event.key)){
+        this.inputString += event.key;
+        if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
+          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+          styleFunctions.glowInputKeyGreen(lastKeyToTypeElement);
+        } else {
+          const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
+          styleFunctions.glowInputKeyRed(lastKeyToTypeElement);
+        }
       }
     },
     checkInput(){
@@ -90,7 +92,7 @@ export default {
       }
     },
     changeKeysToTypeByLevel(){
-      const combos = gameFunctions.createKeyCombos();
+      const combos = gameFunctions.generateKeysToType();
       this.keysToType = combos[this.level];
       if(this.level == combos.length){
         this.resetGame();
@@ -175,14 +177,14 @@ export default {
 }
 
 #gameDone {
-  font-size: 1em;
+  font-size: 2em;
   font-family: Lucida Console, Courier, monospace;
   color: white;
   text-shadow: 2px 2px 10px turquoise;
   position: absolute;
   text-align: center;
   bottom: 60%;
-  left: 8em;
+  left: 0;
   width: 20em;
 }
 
