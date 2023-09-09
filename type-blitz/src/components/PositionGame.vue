@@ -107,16 +107,7 @@ export default {
     resetGame(){
       this.gameFinished = true;
       this.updateScoreboard();
-      this.elapsedTimesAtEachCorrectSubmission = [];
-      this.secondsPerCorrectSubmissions = [];
-      setTimeout(() => {
-        this.gameFinished = false;
-        this.level = -1;
-        this.stringToType = "fj";
-        this.elapsedTime = 0;
-        this.correctCount = 0;
-        this.incorrectCount = 0;
-      }, 5000);
+      this.resetGameVariables();
     },
     updateScoreboard(){
       this.scoreboard.push(
@@ -127,6 +118,18 @@ export default {
             "elapsedTime": this.elapsedTime,
           }
       );
+    },
+    resetGameVariables(){
+      setTimeout(() => {
+        this.gameFinished = false;
+        this.level = -1;
+        this.stringToType = "fj";
+        this.elapsedTime = 0;
+        this.correctCount = 0;
+        this.incorrectCount = 0;
+        this.elapsedTimesAtEachCorrectSubmission = [];
+        this.secondsPerCorrectSubmissions = [];
+      }, 5000);
     }
   },
   mounted() {
