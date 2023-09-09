@@ -49,7 +49,7 @@ export default {
       this.submittedCount++;
       this.correctPercent = gameFunctions.calculatePercentCorrect(this.correctCount, this.submittedCount);
       this.updateElapsedTime();
-      this.checkInput();
+      this.checkSubmission();
       this.inputString = "";
       styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
     },
@@ -68,7 +68,7 @@ export default {
         }
       }
     },
-    checkInput(){
+    checkSubmission(){
       if(this.stringSubmitted === this.stringToType){
         this.resultMatched = true;
         this.correctCount++;
