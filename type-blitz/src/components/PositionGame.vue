@@ -51,7 +51,7 @@ export default {
       this.correctPercent = gameFunctions.calculatePercentCorrect(this.correctCount, this.incorrectCount + this.correctCount);
       this.updateElapsedTime();
       this.checkSubmission();
-      this.updateResultCounts();
+      this.updateScore();
       this.inputString = "";
       styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
     },
@@ -101,9 +101,10 @@ export default {
         this.endGame();
       }
     },
-    updateResultCounts(){
+    updateScore(){
       if(this.gameStarted){
         if(this.resultMatched){
+          this.updateElapsedTime();
           this.correctCount++;
         } else {
           this.incorrectCount++;
@@ -111,10 +112,8 @@ export default {
       }
     },
     updateElapsedTime () {
-      if(this.level > -1){
         const currentTime = new Date().getTime();
         this.elapsedTime = (currentTime - this.startTime) / 1000;
-      }
     },
     endGame(){
       this.gameFinished = true;
