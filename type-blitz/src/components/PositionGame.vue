@@ -6,13 +6,13 @@ export default {
     return {
       startTime: null,
       resultMatched: false,
+      gameStarted: false,
       gameFinished: false,
       inputKey: "",
       inputString:"",
       stringSubmitted: "",
       stringToType:"fj",
       level: -1,
-      submittedCount: 0,
       correctCount: 0,
       incorrectCount: 0,
       elapsedTime: 0,
@@ -48,10 +48,10 @@ export default {
     },
     handleEnterKey(){
       this.stringSubmitted = this.inputString;
-      this.submittedCount++;
-      this.correctPercent = gameFunctions.calculatePercentCorrect(this.correctCount, this.submittedCount);
+      this.correctPercent = gameFunctions.calculatePercentCorrect(this.correctCount, this.incorrectCount + this.correctCount);
       this.updateElapsedTime();
       this.checkSubmission();
+      this.updateResultCounts();
       this.inputString = "";
       styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
     },
@@ -73,10 +73,8 @@ export default {
     checkSubmission(){
       if(this.stringSubmitted === this.stringToType){
         this.resultMatched = true;
-        this.correctCount++;
-
         if(this.level == -1){
-          this.startTime = new Date().getTime();
+          this.startGame()
         }
         this.level++;
 
@@ -90,14 +88,26 @@ export default {
         this.changeKeysToTypeByLevel();
       } else {
         this.resultMatched = false;
-        this.incorrectCount++;
       }
+    },
+    startGame(){
+      this.gameStarted = true;
+      this.startTime = new Date().getTime();
     },
     changeKeysToTypeByLevel(){
       const combos = gameFunctions.generateKeysToType();
       this.stringToType = combos[this.level];
       if(this.level == combos.length){
         this.endGame();
+      }
+    },
+    updateResultCounts(){
+      if(this.gameStarted){
+        if(this.resultMatched){
+          this.correctCount++;
+        } else {
+          this.incorrectCount++;
+        }
       }
     },
     updateElapsedTime () {
@@ -123,12 +133,16 @@ export default {
     },
     resetGameVariables(){
       setTimeout(() => {
+        this.gameStarted = false;
         this.gameFinished = false;
+        this.resultMatched = false;
+        this.startTime = null;
         this.level = -1;
         this.stringToType = "fj";
         this.elapsedTime = 0;
         this.correctCount = 0;
         this.incorrectCount = 0;
+        this.correctPercent = 0;
         this.elapsedTimesAtEachCorrectSubmission = [];
         this.secondsPerCorrectSubmissions = [];
       }, 5000);
@@ -150,7 +164,7 @@ export default {
 
   <div class="allScores" v-if="this.scoreboard.length != 0">
     <h2>Score</h2>
-    <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds : {{ score.correctPercent }}% Correct</p>
+    <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds | Correct: {{ score.correctCount }}  Incorrect:{{ score.incorrectCount }} | {{ score.correctPercent }}% </p>
   </div>
 
   <div id="inputKeyDisplay">
