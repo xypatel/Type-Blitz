@@ -95,7 +95,7 @@ export default {
       const combos = gameFunctions.generateKeysToType();
       this.stringToType = combos[this.level];
       if(this.level == combos.length){
-        this.resetGame();
+        this.endGame();
       }
     },
     updateElapsedTime () {
@@ -104,7 +104,7 @@ export default {
         this.elapsedTime = (currentTime - this.startTime) / 1000;
       }
     },
-    resetGame(){
+    endGame(){
       this.gameFinished = true;
       this.updateScoreboard();
       this.resetGameVariables();
