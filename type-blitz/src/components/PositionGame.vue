@@ -12,14 +12,15 @@ export default {
       stringSubmitted: "",
       stringToType:"fj",
       level: -1,
+      submittedCount: 0,
       correctCount: 0,
       incorrectCount: 0,
       elapsedTime: 0,
+      correctPercent: 0,
       elapsedCorrectTimes: [],
       correctWordTimes: [],
       finishedGameTimes:[],
-      wordCorrectPercentages: [],
-      scores: []
+      scoreboard: []
     };
   },
   methods: {
@@ -49,6 +50,8 @@ export default {
     },
     handleEnterKey(){
       this.stringSubmitted = this.inputString;
+      this.submittedCount++;
+      this.correctPercent = gameFunctions.calculatePercentCorrect(this.correctCount, this.submittedCount);
       this.updateElapsedTime();
       this.checkInput();
       this.inputString = "";
@@ -105,8 +108,7 @@ export default {
     resetGame(){
       this.gameFinished = true;
       this.finishedGameTimes.push(this.elapsedTime);
-      this.wordCorrectPercentages.push(parseFloat((this.correctCount / (this.correctCount + this.incorrectCount)) * 100).toFixed(2));
-      this.scores.push(this.elapsedTime + " seconds" + " : " + this.wordCorrectPercentages[this.wordCorrectPercentages.length - 1] + "% correct");
+      this.updateScoreboard();
       this.elapsedCorrectTimes = [];
       this.correctWordTimes = [];
       setTimeout(() => {
@@ -117,6 +119,16 @@ export default {
         this.correctCount = 0;
         this.incorrectCount = 0;
       }, 5000);
+    },
+    updateScoreboard(){
+      this.scoreboard.push(
+          {
+            "correctCount": this.correctCount,
+            "incorrectCount": this.incorrectCount,
+            "correctPercent": this.correctPercent,
+            "elapsedTime": this.elapsedTime,
+          }
+      );
     }
   },
   mounted() {
@@ -133,9 +145,9 @@ export default {
     <p>Time: {{ elapsedTime }} seconds</p>
   </div>
 
-  <div class="finishedGameTimes" v-if="this.finishedGameTimes.length != 0">
+  <div class="finishedGameTimes" v-if="this.scoreboard.length != 0">
     <h2>Score</h2>
-    <p v-for="(score, index) in scores" :key="index"> {{ index + 1 }}) {{ score }}</p>
+    <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds : {{ score.correctPercent }}% Correct</p>
   </div>
 
   <div id="inputKeyDisplay">
