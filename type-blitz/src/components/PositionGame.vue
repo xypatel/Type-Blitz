@@ -74,13 +74,11 @@ export default {
         if(this.gameStarted === false){
           this.startGame()
         }
-
         this.nextLevel();
       } else {
         this.resultMatched = false;
+        this.updateScore();
       }
-
-      this.updateScore();
     },
     startGame(){
       this.gameStarted = true;
@@ -90,6 +88,7 @@ export default {
       this.correctCount = -1;
     },
     nextLevel(){
+      this.updateScore();
       this.level++;
       this.stringToType = this.stringsToType[this.level];
       if(this.level == this.stringsToType.length){
@@ -159,18 +158,20 @@ export default {
 </script>
 
 <template>
-  <div class="time">
-    <p>Time: {{ elapsedTime }} seconds</p>
+
+  <div id="score">
+    <p>Time: {{ elapsedTime }} seconds | +  {{ secondsPerCorrectSubmissions[secondsPerCorrectSubmissions.length - 1] }} | {{ correctCount }} / {{ incorrectCount + correctCount }} | {{ correctPercent }}%</p>
   </div>
 
   <div class="allScores" v-if="this.scoreboard.length != 0">
-    <h2>Score</h2>
+    <h2>Scoreboard</h2>
     <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds | Correct: {{ score.correctCount }}  Incorrect: {{ score.incorrectCount }} | {{ score.correctPercent }}% </p>
   </div>
 
   <div id="inputKeyDisplay">
     <p>{{ inputKey }}</p>
   </div>
+
   <div class="result">
     <h1 v-if="resultMatched">&#9989</h1>
     <h1 v-else-if="!resultMatched && stringSubmitted.length > 0">&#10060</h1>
@@ -185,10 +186,6 @@ export default {
       Finished in {{ elapsedTime }} Seconds.
       Correct:{{ correctCount }} Incorrect:{{ incorrectCount }}
     </p>
-  </div>
-
-  <div id="wordTime">
-    <p> {{ secondsPerCorrectSubmissions[secondsPerCorrectSubmissions.length - 1] }}</p>
   </div>
 
   <div id="inputString">
@@ -238,6 +235,19 @@ export default {
   bottom: 1em;
   left: 48%;
 }
+
+#score {
+  width: fit-content;
+  font-size: 1.25em;
+  color : rgba(255, 255, 255, 0.5);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: left;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  height: fit-content;
+}
+
 .toType{
   display: flex;
   width: 1em;
@@ -277,20 +287,11 @@ export default {
   color : rgba(255, 255, 255, 0.1);
 }
 
+
 .result h1{
   padding-top: 1em;
   padding-right: 1em;
   font-size: 1em;
-}
-
-.time{
-  width: fit-content;
-  font-size: 1em;
-  color: white;
-  position: absolute;
-  top: 2em;
-  left: 2em;
-  height: fit-content;
 }
 
 .allScores {
@@ -300,17 +301,6 @@ export default {
   position: absolute;
   top: 4em;
   left: 2em;
-  height: fit-content;
-}
-
-#wordTime {
-  width: fit-content;
-  font-size: 1em;
-  color : rgba(255, 255, 255, 0.3);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: absolute;
-  top: 2em;
-  left: 13em;
   height: fit-content;
 }
 </style>
