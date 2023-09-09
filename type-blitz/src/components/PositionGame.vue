@@ -5,12 +5,13 @@ export default {
   data() {
     return {
       startTime: null,
-      level: -1,
+      resultMatched: false,
+      gameFinished: false,
       inputKey: "",
       inputString:"",
       stringSubmitted: "",
       stringToType:"fj",
-      resultMatched: false,
+      level: -1,
       correctCount: 0,
       incorrectCount: 0,
       elapsedTime: 0,
@@ -18,8 +19,7 @@ export default {
       correctWordTimes: [],
       finishedGameTimes:[],
       wordCorrectPercentages: [],
-      scores: [],
-      gameFinished: false
+      scores: []
     };
   },
   methods: {
