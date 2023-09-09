@@ -19,7 +19,6 @@ export default {
       correctPercent: 0,
       elapsedCorrectTimes: [],
       correctWordTimes: [],
-      finishedGameTimes:[],
       scoreboard: []
     };
   },
@@ -107,7 +106,6 @@ export default {
     },
     resetGame(){
       this.gameFinished = true;
-      this.finishedGameTimes.push(this.elapsedTime);
       this.updateScoreboard();
       this.elapsedCorrectTimes = [];
       this.correctWordTimes = [];
@@ -145,7 +143,7 @@ export default {
     <p>Time: {{ elapsedTime }} seconds</p>
   </div>
 
-  <div class="finishedGameTimes" v-if="this.scoreboard.length != 0">
+  <div class="allScores" v-if="this.scoreboard.length != 0">
     <h2>Score</h2>
     <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds : {{ score.correctPercent }}% Correct</p>
   </div>
@@ -164,7 +162,7 @@ export default {
       <p v-for="(char, index) in stringToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
     <p id="gameDone" v-if="gameFinished">
-      Finished in {{ finishedGameTimes[finishedGameTimes.length - 1] }} Seconds.
+      Finished in {{ elapsedTime }} Seconds.
       Correct:{{ correctCount }} Incorrect:{{ incorrectCount }}
     </p>
   </div>
@@ -275,7 +273,7 @@ export default {
   height: fit-content;
 }
 
-.finishedGameTimes {
+.allScores {
   width: fit-content;
   font-size: 1em;
   color: white;
