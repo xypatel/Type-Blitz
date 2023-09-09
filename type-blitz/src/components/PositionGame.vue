@@ -19,7 +19,8 @@ export default {
       correctPercent: 0,
       elapsedTimesAtEachCorrectSubmission: [],
       secondsPerCorrectSubmissions: [],
-      scoreboard: []
+      scoreboard: [],
+      stringsToType : []
     };
   },
   methods: {
@@ -74,7 +75,6 @@ export default {
         if(this.gameStarted === false){
           this.startGame()
         }
-        this.level++;
 
         if(this.elapsedTimesAtEachCorrectSubmission.length > 0){
           this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
@@ -83,7 +83,7 @@ export default {
           this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
         }
 
-        this.changeKeysToTypeByLevel();
+        this.nextLevel();
       } else {
         this.resultMatched = false;
       }
@@ -93,11 +93,12 @@ export default {
     startGame(){
       this.gameStarted = true;
       this.startTime = new Date().getTime();
+      this.stringsToType = gameFunctions.generateKeysToType();
     },
-    changeKeysToTypeByLevel(){
-      const combos = gameFunctions.generateKeysToType();
-      this.stringToType = combos[this.level];
-      if(this.level == combos.length){
+    nextLevel(){
+      this.level++;
+      this.stringToType = this.stringsToType[this.level];
+      if(this.level == this.stringsToType.length){
         this.endGame();
       }
     },
@@ -106,7 +107,6 @@ export default {
         this.updateElapsedTime();
         if(this.resultMatched === true){
           this.correctCount++;
-          this.resultMatched = false;
         } else {
           this.incorrectCount++;
         }
@@ -148,6 +148,7 @@ export default {
         this.correctPercent = 0;
         this.elapsedTimesAtEachCorrectSubmission = [];
         this.secondsPerCorrectSubmissions = [];
+        this.stringsToType = [];
       }, 3000);
     }
   },
