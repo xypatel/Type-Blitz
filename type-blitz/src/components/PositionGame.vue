@@ -31,9 +31,6 @@ export default {
       } else if(event.key == "Enter"){
         this.handleEnterKey();
       } else {
-        if(this.inputString.length >= this.stringToType.length && gameFunctions.isValidInputKey(event.key)){
-          this.handleInputStringTooLong();
-        }
         this.handleValidInputKey();
       }
 
@@ -58,6 +55,9 @@ export default {
     },
     handleValidInputKey(){
       if(gameFunctions.isValidInputKey(event.key)){
+        if(this.inputString.length >= this.stringToType.length){
+          this.handleInputStringTooLong();
+        }
         this.inputString += event.key;
         if(this.stringToType.charAt(this.inputString.length - 1) == event.key){
           const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
