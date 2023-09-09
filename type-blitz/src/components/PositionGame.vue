@@ -26,21 +26,21 @@ export default {
     onKeyup(event) {
       this.inputKey = event.key;
 
-      this.handleInputStringTooLong();
-
       if(event.key == "Backspace"){
         this.handleBackspaceKey();
       } else if(event.key == "Enter"){
         this.handleEnterKey();
       } else {
+        if(this.inputString.length >= this.stringToType.length && gameFunctions.isValidInputKey(event.key)){
+          this.handleInputStringTooLong();
+        }
         this.handleValidInputKey();
       }
+
     },
     handleInputStringTooLong(){
-      if(this.inputString.length >= this.stringToType.length && gameFunctions.isValidInputKey(event.key)){
         this.inputString = "";
         styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
-      }
     },
     handleBackspaceKey(){
       const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
