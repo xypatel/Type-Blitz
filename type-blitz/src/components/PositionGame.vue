@@ -4,43 +4,43 @@ import * as gameFunctions from "./common_functions/game_functions.js";
 export default {
   data() {
     return {
+      startTime: null,
+      resultMatched: false,
+      gameStarted: false,
+      gameFinished: false,
       inputKey: "",
       inputString:"",
-      keysToType:"fj",
-      resultMatched: false,
-      keysEntered: "",
+      stringSubmitted: "",
+      stringToType:"fj",
       level: -1,
-      startTime: null,
-      elapsedTime: 0,
-      elapsedCorrectTimes: [],
-      correctWordTimes: [],
-      finishedGameTimes:[],
       correctCount: 0,
       incorrectCount: 0,
-      wordCorrectPercentages: [],
-      scores: [],
-      gameFinished: false
+      elapsedTime: 0,
+      correctPercent: 0,
+      elapsedTimesAtEachCorrectSubmission: [],
+      secondsPerCorrectSubmissions: [],
+      scoreboard: [],
+      stringsToType : []
     };
   },
   methods: {
     onKeyup(event) {
       this.inputKey = event.key;
 
-      this.handleInputStringTooLong();
-
       if(event.key == "Backspace"){
         this.handleBackspaceKey();
       } else if(event.key == "Enter"){
         this.handleEnterKey();
-      } else {
+      } else if(event.key == "Escape"){
+        this.endGame();
+      }  else {
         this.handleValidInputKey();
       }
+
     },
     handleInputStringTooLong(){
-      if(this.inputString.length >= this.keysToType.length && gameFunctions.isValidInputKey(event.key)){
         this.inputString = "";
         styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
-      }
     },
     handleBackspaceKey(){
       const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
@@ -48,16 +48,18 @@ export default {
       this.inputString = this.inputString.slice(0, -1);
     },
     handleEnterKey(){
-      this.keysEntered = this.inputString;
-      this.updateElapsedTime();
-      this.checkInput();
+      this.stringSubmitted = this.inputString;
+      this.checkSubmission();
       this.inputString = "";
       styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
     },
     handleValidInputKey(){
       if(gameFunctions.isValidInputKey(event.key)){
+        if(this.inputString.length >= this.stringToType.length){
+          this.handleInputStringTooLong();
+        }
         this.inputString += event.key;
-        if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
+        if(this.stringToType.charAt(this.inputString.length - 1) == event.key){
           const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
           styleFunctions.glowInputKeyGreen(lastKeyToTypeElement);
         } else {
@@ -66,59 +68,85 @@ export default {
         }
       }
     },
-    checkInput(){
-      if(this.keysEntered === this.keysToType){
+    checkSubmission(){
+      if(this.stringSubmitted === this.stringToType){
         this.resultMatched = true;
-        this.correctCount++;
-
-        if(this.level == -1){
-          this.startTime = new Date().getTime();
-        }
-        console.log("Correct!");
-        this.level++;
-
-        if(this.elapsedCorrectTimes.length > 0){
-          this.elapsedCorrectTimes.push(this.elapsedTime);
-          this.correctWordTimes.push(parseFloat(this.elapsedCorrectTimes[this.elapsedCorrectTimes.length - 1] - this.elapsedCorrectTimes[this.elapsedCorrectTimes.length - 2]).toFixed(3));
-        } else {
-          this.elapsedCorrectTimes.push(this.elapsedTime);
+        if(this.gameStarted === false){
+          this.startGame()
         }
 
-        this.changeKeysToTypeByLevel();
+        this.nextLevel();
       } else {
         this.resultMatched = false;
-        this.incorrectCount++;
-        console.log("Incorrect!");
+      }
+
+      this.updateScore();
+    },
+    startGame(){
+      this.gameStarted = true;
+      this.startTime = new Date().getTime();
+      this.stringsToType = gameFunctions.generateKeysToType();
+      this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
+      this.correctCount = -1;
+    },
+    nextLevel(){
+      this.level++;
+      this.stringToType = this.stringsToType[this.level];
+      if(this.level == this.stringsToType.length){
+        this.endGame();
       }
     },
-    changeKeysToTypeByLevel(){
-      const combos = gameFunctions.generateKeysToType();
-      this.keysToType = combos[this.level];
-      if(this.level == combos.length){
-        this.resetGame();
+    updateScore(){
+      if(this.gameStarted === true){
+        this.updateElapsedTime();
+        if(this.resultMatched === true){
+          this.correctCount++;
+          this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
+          this.secondsPerCorrectSubmissions.push(parseFloat(this.elapsedTimesAtEachCorrectSubmission[this.elapsedTimesAtEachCorrectSubmission.length - 1] - this.elapsedTimesAtEachCorrectSubmission[this.elapsedTimesAtEachCorrectSubmission.length - 2]).toFixed(3));
+        } else {
+          this.incorrectCount++;
+        }
+        this.correctPercent = gameFunctions.calculatePercentCorrect(this.correctCount, this.incorrectCount + this.correctCount);
+
       }
     },
     updateElapsedTime () {
-      if(this.level > -1){
+      if(this.startTime != null) {
         const currentTime = new Date().getTime();
         this.elapsedTime = (currentTime - this.startTime) / 1000;
       }
     },
-    resetGame(){
+    endGame(){
       this.gameFinished = true;
-      this.finishedGameTimes.push(this.elapsedTime);
-      this.wordCorrectPercentages.push(parseFloat((this.correctCount / (this.correctCount + this.incorrectCount)) * 100).toFixed(2));
-      this.scores.push(this.elapsedTime + " seconds" + " : " + this.wordCorrectPercentages[this.wordCorrectPercentages.length - 1] + "% correct");
-      this.elapsedCorrectTimes = [];
-      this.correctWordTimes = [];
+      this.updateScoreboard();
+      this.resetGameVariables();
+    },
+    updateScoreboard(){
+      this.scoreboard.push(
+          {
+            "correctCount": this.correctCount,
+            "incorrectCount": this.incorrectCount,
+            "correctPercent": this.correctPercent,
+            "elapsedTime": this.elapsedTime,
+          }
+      );
+    },
+    resetGameVariables(){
       setTimeout(() => {
+        this.gameStarted = false;
         this.gameFinished = false;
+        this.resultMatched = false;
+        this.startTime = null;
         this.level = -1;
-        this.keysToType = "fj";
+        this.stringToType = "fj";
         this.elapsedTime = 0;
         this.correctCount = 0;
         this.incorrectCount = 0;
-      }, 5000);
+        this.correctPercent = 0;
+        this.elapsedTimesAtEachCorrectSubmission = [];
+        this.secondsPerCorrectSubmissions = [];
+        this.stringsToType = [];
+      }, 3000);
     }
   },
   mounted() {
@@ -135,9 +163,9 @@ export default {
     <p>Time: {{ elapsedTime }} seconds</p>
   </div>
 
-  <div class="finishedGameTimes" v-if="this.finishedGameTimes.length != 0">
+  <div class="allScores" v-if="this.scoreboard.length != 0">
     <h2>Score</h2>
-    <p v-for="(score, index) in scores" :key="index"> {{ index + 1 }}) {{ score }}</p>
+    <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds | Correct: {{ score.correctCount }}  Incorrect: {{ score.incorrectCount }} | {{ score.correctPercent }}% </p>
   </div>
 
   <div id="inputKeyDisplay">
@@ -145,22 +173,22 @@ export default {
   </div>
   <div class="result">
     <h1 v-if="resultMatched">&#9989</h1>
-    <h1 v-else-if="!resultMatched && keysEntered.length > 0">&#10060</h1>
-    <p>{{keysEntered}}</p>
+    <h1 v-else-if="!resultMatched && stringSubmitted.length > 0">&#10060</h1>
+    <p>{{stringSubmitted}}</p>
   </div>
 
   <div class="aboveBoard" >
     <div class="toType" v-if="!gameFinished">
-      <p v-for="(char, index) in keysToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
+      <p v-for="(char, index) in stringToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
     <p id="gameDone" v-if="gameFinished">
-      Finished in {{ finishedGameTimes[finishedGameTimes.length - 1] }} Seconds.
+      Finished in {{ elapsedTime }} Seconds.
       Correct:{{ correctCount }} Incorrect:{{ incorrectCount }}
     </p>
   </div>
 
   <div id="wordTime">
-    <p> {{ correctWordTimes[correctWordTimes.length - 1] }}</p>
+    <p> {{ secondsPerCorrectSubmissions[secondsPerCorrectSubmissions.length - 1] }}</p>
   </div>
 
   <div id="inputString">
@@ -265,7 +293,7 @@ export default {
   height: fit-content;
 }
 
-.finishedGameTimes {
+.allScores {
   width: fit-content;
   font-size: 1em;
   color: white;

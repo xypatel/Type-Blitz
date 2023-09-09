@@ -32,4 +32,11 @@ function isValidInputKey(key){
     return true;
 }
 
-export { generateKeysToType, isValidInputKey };
+function calculatePercentCorrect(correct, total){
+    if(total == 0){
+        return 0;
+    }
+    return Math.round((correct / total) * 100);
+}
+
+export { generateKeysToType, isValidInputKey, calculatePercentCorrect };
