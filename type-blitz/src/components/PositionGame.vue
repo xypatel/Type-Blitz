@@ -49,9 +49,7 @@ export default {
     handleEnterKey(){
       this.stringSubmitted = this.inputString;
       this.correctPercent = gameFunctions.calculatePercentCorrect(this.correctCount, this.incorrectCount + this.correctCount);
-      this.updateElapsedTime();
       this.checkSubmission();
-      this.updateScore();
       this.inputString = "";
       styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
     },
@@ -73,7 +71,7 @@ export default {
     checkSubmission(){
       if(this.stringSubmitted === this.stringToType){
         this.resultMatched = true;
-        if(this.level == -1){
+        if(this.gameStarted === false){
           this.startGame()
         }
         this.level++;
@@ -89,6 +87,8 @@ export default {
       } else {
         this.resultMatched = false;
       }
+
+      this.updateScore();
     },
     startGame(){
       this.gameStarted = true;
@@ -102,18 +102,22 @@ export default {
       }
     },
     updateScore(){
-      if(this.gameStarted){
-        if(this.resultMatched){
-          this.updateElapsedTime();
+      if(this.gameStarted === true){
+        this.updateElapsedTime();
+        if(this.resultMatched === true){
           this.correctCount++;
+          this.resultMatched = false;
         } else {
           this.incorrectCount++;
         }
+
       }
     },
     updateElapsedTime () {
+      if(this.startTime != null) {
         const currentTime = new Date().getTime();
         this.elapsedTime = (currentTime - this.startTime) / 1000;
+      }
     },
     endGame(){
       this.gameFinished = true;
@@ -144,7 +148,7 @@ export default {
         this.correctPercent = 0;
         this.elapsedTimesAtEachCorrectSubmission = [];
         this.secondsPerCorrectSubmissions = [];
-      }, 5000);
+      }, 3000);
     }
   },
   mounted() {
@@ -163,7 +167,7 @@ export default {
 
   <div class="allScores" v-if="this.scoreboard.length != 0">
     <h2>Score</h2>
-    <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds | Correct: {{ score.correctCount }}  Incorrect:{{ score.incorrectCount }} | {{ score.correctPercent }}% </p>
+    <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds | Correct: {{ score.correctCount }}  Incorrect: {{ score.incorrectCount }} | {{ score.correctPercent }}% </p>
   </div>
 
   <div id="inputKeyDisplay">
