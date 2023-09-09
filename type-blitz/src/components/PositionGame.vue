@@ -74,7 +74,6 @@ export default {
         if(this.level == -1){
           this.startTime = new Date().getTime();
         }
-        console.log("Correct!");
         this.level++;
 
         if(this.elapsedCorrectTimes.length > 0){
@@ -88,7 +87,6 @@ export default {
       } else {
         this.resultMatched = false;
         this.incorrectCount++;
-        console.log("Incorrect!");
       }
     },
     changeKeysToTypeByLevel(){
