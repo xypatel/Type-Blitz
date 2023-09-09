@@ -4,19 +4,19 @@ import * as gameFunctions from "./common_functions/game_functions.js";
 export default {
   data() {
     return {
+      startTime: null,
+      level: -1,
       inputKey: "",
       inputString:"",
-      keysToType:"fj",
+      stringSubmitted: "",
+      stringToType:"fj",
       resultMatched: false,
-      keysEntered: "",
-      level: -1,
-      startTime: null,
+      correctCount: 0,
+      incorrectCount: 0,
       elapsedTime: 0,
       elapsedCorrectTimes: [],
       correctWordTimes: [],
       finishedGameTimes:[],
-      correctCount: 0,
-      incorrectCount: 0,
       wordCorrectPercentages: [],
       scores: [],
       gameFinished: false
@@ -37,7 +37,7 @@ export default {
       }
     },
     handleInputStringTooLong(){
-      if(this.inputString.length >= this.keysToType.length && gameFunctions.isValidInputKey(event.key)){
+      if(this.inputString.length >= this.stringToType.length && gameFunctions.isValidInputKey(event.key)){
         this.inputString = "";
         styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
       }
@@ -48,7 +48,7 @@ export default {
       this.inputString = this.inputString.slice(0, -1);
     },
     handleEnterKey(){
-      this.keysEntered = this.inputString;
+      this.stringSubmitted = this.inputString;
       this.updateElapsedTime();
       this.checkInput();
       this.inputString = "";
@@ -57,7 +57,7 @@ export default {
     handleValidInputKey(){
       if(gameFunctions.isValidInputKey(event.key)){
         this.inputString += event.key;
-        if(this.keysToType.charAt(this.inputString.length - 1) == event.key){
+        if(this.stringToType.charAt(this.inputString.length - 1) == event.key){
           const lastKeyToTypeElement = document.getElementsByClassName("toType")[0].children[this.inputString.length - 1];
           styleFunctions.glowInputKeyGreen(lastKeyToTypeElement);
         } else {
@@ -67,7 +67,7 @@ export default {
       }
     },
     checkInput(){
-      if(this.keysEntered === this.keysToType){
+      if(this.stringSubmitted === this.stringToType){
         this.resultMatched = true;
         this.correctCount++;
 
@@ -93,7 +93,7 @@ export default {
     },
     changeKeysToTypeByLevel(){
       const combos = gameFunctions.generateKeysToType();
-      this.keysToType = combos[this.level];
+      this.stringToType = combos[this.level];
       if(this.level == combos.length){
         this.resetGame();
       }
@@ -114,7 +114,7 @@ export default {
       setTimeout(() => {
         this.gameFinished = false;
         this.level = -1;
-        this.keysToType = "fj";
+        this.stringToType = "fj";
         this.elapsedTime = 0;
         this.correctCount = 0;
         this.incorrectCount = 0;
@@ -145,13 +145,13 @@ export default {
   </div>
   <div class="result">
     <h1 v-if="resultMatched">&#9989</h1>
-    <h1 v-else-if="!resultMatched && keysEntered.length > 0">&#10060</h1>
-    <p>{{keysEntered}}</p>
+    <h1 v-else-if="!resultMatched && stringSubmitted.length > 0">&#10060</h1>
+    <p>{{stringSubmitted}}</p>
   </div>
 
   <div class="aboveBoard" >
     <div class="toType" v-if="!gameFinished">
-      <p v-for="(char, index) in keysToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
+      <p v-for="(char, index) in stringToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
     <p id="gameDone" v-if="gameFinished">
       Finished in {{ finishedGameTimes[finishedGameTimes.length - 1] }} Seconds.
