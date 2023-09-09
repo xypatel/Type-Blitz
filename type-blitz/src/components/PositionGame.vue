@@ -49,7 +49,6 @@ export default {
     },
     handleEnterKey(){
       this.stringSubmitted = this.inputString;
-      this.correctPercent = gameFunctions.calculatePercentCorrect(this.correctCount, this.incorrectCount + this.correctCount);
       this.checkSubmission();
       this.inputString = "";
       styleFunctions.glowKeysToTypeYellow(document.getElementsByClassName("toType")[0].children);
@@ -76,13 +75,6 @@ export default {
           this.startGame()
         }
 
-        if(this.elapsedTimesAtEachCorrectSubmission.length > 0){
-          this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
-          this.secondsPerCorrectSubmissions.push(parseFloat(this.elapsedTimesAtEachCorrectSubmission[this.elapsedTimesAtEachCorrectSubmission.length - 1] - this.elapsedTimesAtEachCorrectSubmission[this.elapsedTimesAtEachCorrectSubmission.length - 2]).toFixed(3));
-        } else {
-          this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
-        }
-
         this.nextLevel();
       } else {
         this.resultMatched = false;
@@ -94,6 +86,8 @@ export default {
       this.gameStarted = true;
       this.startTime = new Date().getTime();
       this.stringsToType = gameFunctions.generateKeysToType();
+      this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
+      this.correctCount = -1;
     },
     nextLevel(){
       this.level++;
@@ -107,9 +101,12 @@ export default {
         this.updateElapsedTime();
         if(this.resultMatched === true){
           this.correctCount++;
+          this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
+          this.secondsPerCorrectSubmissions.push(parseFloat(this.elapsedTimesAtEachCorrectSubmission[this.elapsedTimesAtEachCorrectSubmission.length - 1] - this.elapsedTimesAtEachCorrectSubmission[this.elapsedTimesAtEachCorrectSubmission.length - 2]).toFixed(3));
         } else {
           this.incorrectCount++;
         }
+        this.correctPercent = gameFunctions.calculatePercentCorrect(this.correctCount, this.incorrectCount + this.correctCount);
 
       }
     },
