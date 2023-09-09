@@ -30,7 +30,9 @@ export default {
         this.handleBackspaceKey();
       } else if(event.key == "Enter"){
         this.handleEnterKey();
-      } else {
+      } else if(event.key == "Escape"){
+        this.endGame();
+      }  else {
         this.handleValidInputKey();
       }
 
