@@ -18,7 +18,7 @@ export default {
       elapsedTime: 0,
       correctPercent: 0,
       elapsedCorrectTimes: [],
-      correctWordTimes: [],
+      secondsPerCorrectWords: [],
       scoreboard: []
     };
   },
@@ -80,7 +80,7 @@ export default {
 
         if(this.elapsedCorrectTimes.length > 0){
           this.elapsedCorrectTimes.push(this.elapsedTime);
-          this.correctWordTimes.push(parseFloat(this.elapsedCorrectTimes[this.elapsedCorrectTimes.length - 1] - this.elapsedCorrectTimes[this.elapsedCorrectTimes.length - 2]).toFixed(3));
+          this.secondsPerCorrectWords.push(parseFloat(this.elapsedCorrectTimes[this.elapsedCorrectTimes.length - 1] - this.elapsedCorrectTimes[this.elapsedCorrectTimes.length - 2]).toFixed(3));
         } else {
           this.elapsedCorrectTimes.push(this.elapsedTime);
         }
@@ -108,7 +108,7 @@ export default {
       this.gameFinished = true;
       this.updateScoreboard();
       this.elapsedCorrectTimes = [];
-      this.correctWordTimes = [];
+      this.secondsPerCorrectWords = [];
       setTimeout(() => {
         this.gameFinished = false;
         this.level = -1;
@@ -168,7 +168,7 @@ export default {
   </div>
 
   <div id="wordTime">
-    <p> {{ correctWordTimes[correctWordTimes.length - 1] }}</p>
+    <p> {{ secondsPerCorrectWords[secondsPerCorrectWords.length - 1] }}</p>
   </div>
 
   <div id="inputString">
