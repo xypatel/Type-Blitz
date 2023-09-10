@@ -165,7 +165,7 @@ export default {
 
   <div class="allScores" v-if="this.scoreboard.length != 0">
     <h2>Scoreboard</h2>
-    <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds | Correct: {{ score.correctCount }}  Incorrect: {{ score.incorrectCount }} | {{ score.correctPercent }}% </p>
+    <p v-for="(score, index) in scoreboard" :key="index"> {{ index + 1 }}) {{ score.elapsedTime }} seconds | {{ score.correctCount }} / {{ score.incorrectCount + score.correctCount }} | {{ score.correctPercent }}% </p>
   </div>
 
   <div id="inputKeyDisplay">
