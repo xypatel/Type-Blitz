@@ -1,4 +1,4 @@
-class Timer {
+export class Timer {
   constructor() {
     this.elapsedTime = 0;
     this.elapsedTimeAtEachLevel = [];
@@ -26,10 +26,10 @@ class Timer {
     this.elapsedTimeAtEachLevel.push(this.elapsedTime);
 
     if (this.elapsedTimeAtEachLevel.length > 1) {
-      this.secondsPerLevel.push(
+      const changeInTime =
         this.elapsedTimeAtEachLevel[this.elapsedTimeAtEachLevel.length - 1] -
-          this.elapsedTimeAtEachLevel[this.elapsedTimeAtEachLevel.length - 2]
-      );
+        this.elapsedTimeAtEachLevel[this.elapsedTimeAtEachLevel.length - 2];
+      this.secondsPerLevel.push( changeInTime.toPrecision(3));
     }
   }
 
@@ -42,4 +42,4 @@ class Timer {
   }
 }
 
-module.exports = Timer;
+// TODO:  module.exports = Timer;  need this on server for node and unit tests, does not work by default on browser.
