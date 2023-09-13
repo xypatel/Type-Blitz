@@ -2,7 +2,6 @@
 import * as styleFunctions from "./common_functions/style_functions.js";
 import * as gameFunctions from "./common_functions/game_functions.js";
 import {Timer} from "../utility/timer";
-// const Timer = require("../utility/timer");
 export default {
   data() {
     return {
