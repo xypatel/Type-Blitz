@@ -1,10 +1,10 @@
 <script>
 import * as styleFunctions from "./common_functions/style_functions.js";
 import * as gameFunctions from "./common_functions/game_functions.js";
+import {Timer} from "../utility/timer";
 export default {
   data() {
     return {
-      startTime: null,
       resultMatched: false,
       gameStarted: false,
       gameFinished: false,
@@ -15,12 +15,10 @@ export default {
       level: -1,
       correctCount: 0,
       incorrectCount: 0,
-      elapsedTime: 0,
       correctPercent: 0,
-      elapsedTimesAtEachCorrectSubmission: [],
-      secondsPerCorrectSubmissions: [],
       scoreboard: [],
-      stringsToType : []
+      stringsToType : [],
+      timer : new Timer(),
     };
   },
   methods: {
@@ -82,9 +80,8 @@ export default {
     },
     startGame(){
       this.gameStarted = true;
-      this.startTime = new Date().getTime();
+      this.timer.startTimer();
       this.stringsToType = gameFunctions.generateKeysToType();
-      this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
       this.correctCount = -1;
     },
     nextLevel(){
@@ -97,11 +94,9 @@ export default {
     },
     updateScore(){
       if(this.gameStarted === true){
-        this.updateElapsedTime();
         if(this.resultMatched === true){
           this.correctCount++;
-          this.elapsedTimesAtEachCorrectSubmission.push(this.elapsedTime);
-          this.secondsPerCorrectSubmissions.push(parseFloat(this.elapsedTimesAtEachCorrectSubmission[this.elapsedTimesAtEachCorrectSubmission.length - 1] - this.elapsedTimesAtEachCorrectSubmission[this.elapsedTimesAtEachCorrectSubmission.length - 2]).toFixed(3));
+          this.timer.updateTimer();
         } else {
           this.incorrectCount++;
         }
@@ -109,15 +104,10 @@ export default {
 
       }
     },
-    updateElapsedTime () {
-      if(this.startTime != null) {
-        const currentTime = new Date().getTime();
-        this.elapsedTime = (currentTime - this.startTime) / 1000;
-      }
-    },
     endGame(){
       this.gameFinished = true;
       this.updateScoreboard();
+      this.timer.stopTimer();
       this.resetGameVariables();
     },
     updateScoreboard(){
@@ -126,7 +116,7 @@ export default {
             "correctCount": this.correctCount,
             "incorrectCount": this.incorrectCount,
             "correctPercent": this.correctPercent,
-            "elapsedTime": this.elapsedTime,
+            "elapsedTime": this.timer.elapsedTime,
           }
       );
     },
@@ -135,16 +125,13 @@ export default {
         this.gameStarted = false;
         this.gameFinished = false;
         this.resultMatched = false;
-        this.startTime = null;
         this.level = -1;
         this.stringToType = "fj";
-        this.elapsedTime = 0;
         this.correctCount = 0;
         this.incorrectCount = 0;
         this.correctPercent = 0;
-        this.elapsedTimesAtEachCorrectSubmission = [];
-        this.secondsPerCorrectSubmissions = [];
         this.stringsToType = [];
+        this.timer.resetTimer();
       }, 3000);
     }
   },
@@ -160,7 +147,7 @@ export default {
 <template>
 
   <div id="score">
-    <p>Time: {{ elapsedTime }} seconds | +  {{ secondsPerCorrectSubmissions[secondsPerCorrectSubmissions.length - 1] }} | {{ correctCount }} / {{ incorrectCount + correctCount }} | {{ correctPercent }}%</p>
+    <p>Time: {{ timer.elapsedTime }} seconds | +  {{ timer.secondsPerLevel[timer.secondsPerLevel.length - 1] }} | {{ correctCount }} / {{ incorrectCount + correctCount }} | {{ correctPercent }}%</p>
   </div>
 
   <div class="allScores" v-if="this.scoreboard.length != 0">
@@ -183,7 +170,7 @@ export default {
       <p v-for="(char, index) in stringToType" :key="char" id="{{ index }}" class="">{{ char }}</p>
     </div>
     <p id="gameDone" v-if="gameFinished">
-      Finished in {{ elapsedTime }} Seconds.
+      Finished in {{ timer.elapsedTime }} Seconds.
       Correct:{{ correctCount }} Incorrect:{{ incorrectCount }}
     </p>
   </div>
