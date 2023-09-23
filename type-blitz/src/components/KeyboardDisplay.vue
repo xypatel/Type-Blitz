@@ -1,4 +1,5 @@
 <script>
+import * as styleFunctions from "./common_functions/style_functions.js";
 export default {
   data() {
     return {
@@ -11,69 +12,8 @@ export default {
   },
   methods: {
     setColors(colorScheme) {
-      const classic = {
-        pinkyColor: "hsl(210, 100%, 50%)",
-        ringColor: "hsl(190, 100%, 50%)",
-        middleColor: "hsl(171, 100%, 50%)",
-        pointer1stColor: "hsl(155, 100%, 50%)",
-        pointer2ndColor: "hsl(145, 100%, 50%)",
-      }
-
-      const aqua = {
-        pinkyColor: "hsl(220, 100%, 50%)",
-        ringColor: "hsl(220, 100%, 60%)",
-        middleColor: "hsl(200, 100%, 50%)",
-        pointer1stColor: "hsl(180, 100%, 60%)",
-        pointer2ndColor: "hsl(160, 100%, 60%)",
-      }
-
-      const fire = {
-        pinkyColor: "hsl(5, 100%, 50%)",
-        ringColor: "hsl(20, 100%, 50%)",
-        middleColor: "hsl(30, 100%, 50%)",
-        pointer1stColor: "hsl(35, 100%, 50%)",
-        pointer2ndColor: "hsl(40, 100%, 50%)",
-      }
-
-      const steel = {
-        pinkyColor: "hsl(0, 0%, 30%)",
-        ringColor: "hsl(0, 0%, 40%)",
-        middleColor: "hsl(0, 0%, 50%)",
-        pointer1stColor: "hsl(0, 0%, 60%)",
-        pointer2ndColor: "hsl(0, 0%, 80%)",
-      }
-
-      const bubblegum = {
-        pinkyColor: "hsl(330, 100%, 60%)",
-        ringColor: "hsl(330, 100%, 70%)",
-        middleColor: "hsl(330, 100%, 80%)",
-        pointer1stColor: "hsl(330, 100%, 85%)",
-        pointer2ndColor: "hsl(330, 100%, 90%)",
-      }
-
-      const desert = {
-        pinkyColor: "hsl(30, 90%, 60%)",
-        ringColor: "hsl(35, 80%, 60%)",
-        middleColor: "hsl(40, 90%, 60%)",
-        pointer1stColor: "hsl(45, 100%, 70%)",
-        pointer2ndColor: "hsl(45, 90%, 75%)",
-      }
-
-      switch (colorScheme) {
-        case "classic": colorScheme = classic; break;
-        case "aqua": colorScheme = aqua; break;
-        case "fire": colorScheme = fire; break;
-        case "steel": colorScheme = steel; break;
-        case "bubblegum": colorScheme = bubblegum; break;
-        case "desert": colorScheme = desert; break;
-        default: colorScheme = aqua; break;
-      }
-
-      this.pinkyColor = colorScheme.pinkyColor;
-      this.ringColor = colorScheme.ringColor;
-      this.middleColor = colorScheme.middleColor;
-      this.pointer1stColor = colorScheme.pointer1stColor;
-      this.pointer2ndColor = colorScheme.pointer2ndColor;
+      const colors = styleFunctions.setColorScheme(colorScheme);
+      colors && Object.assign(this, colors);
     },
     onKeyup(event) {
       this.bumpKey(event);
@@ -102,12 +42,12 @@ export default {
           case '=' : keyPressed = "Equal"; break;
           case '\\' : keyPressed = "Backslash"; break;
           case ']' : keyPressed = "CloseBracket"; break;
-          case '\[' : keyPressed = "OpenBracket"; break;
-          case '\;' : keyPressed = "SemiColon"; break;
+          case '[' : keyPressed = "OpenBracket"; break;
+          case ';' : keyPressed = "SemiColon"; break;
           case '\'' : keyPressed = "Quote"; break;
-          case '\,' : keyPressed = "Comma"; break;
-          case '\.' : keyPressed = "Period"; break;
-          case '\/' : keyPressed = "Forwardslash"; break;
+          case ',' : keyPressed = "Comma"; break;
+          case '.' : keyPressed = "Period"; break;
+          case '/' : keyPressed = "Forwardslash"; break;
         }
       }
       return keyPressed;
@@ -223,7 +163,7 @@ export default {
   <button class="dropbtn">Colors</button>
     <div class="dropdown-content">
       <a href="#" @click="setColors('classic')" style="color: mediumspringgreen">Classic 🏝️</a>
-      <a href="#" @click="setColors('steel')" style="color: grey">Steel 🪙</a>
+      <a href="#" @click="setColors('metal')" style="color: grey">Metal 🪙</a>
       <a href="#" @click="setColors('aqua')" style="color: deepskyblue">Aqua 💧</a>
       <a href="#" @click="setColors('fire')" style="color: orangered">Fire 🔥</a>
       <a href="#" @click="setColors('bubblegum')" style="color: hotpink">BubbleGum 🍬</a>
